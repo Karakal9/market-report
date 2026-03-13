@@ -1,9 +1,4 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8">
-      <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-      <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-      <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-      <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-    
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap');
       :root {
@@ -135,7 +130,7 @@
         <div class="breadth-card">
           <div class="metric-label">Market Breadth (% of stocks above 50MA)</div>
           <div class="breadth-track">
-            <div class="breadth-fill" style="width: 3220.0%"></div>
+            <div class="breadth-fill" style="width: 32.2%"></div>
           </div>
           <div class="breadth-labels"><span>0% (OVERSOLD)</span><span>50% (NEUTRAL)</span><span>100% (OVERBOUGHT)</span></div>
         </div>
@@ -143,13 +138,33 @@
 
       <div class="section-wrap">
         <div class="section-title"><span>🔥</span> Sector Performance Heatmap</div>
-        <div id="treemap-div" style="width:100%; height:480px; background:var(--bg-card); border-radius:12px; border:1px solid var(--border); opacity:0.6;"></div>
+        
+    <div style="display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:10px; font-size:11px; color:#4a6080;">
+      <span>Day return:</span>
+      <div style="display:flex; height:10px; border-radius:3px; overflow:hidden; width:180px;">
+        <div style="flex:1; background:#991b1b;"></div>
+        <div style="flex:1; background:#dc2626;"></div>
+        <div style="flex:1; background:#f87171;"></div>
+        <div style="flex:1; background:#475569;"></div>
+        <div style="flex:1; background:#34d399;"></div>
+        <div style="flex:1; background:#10b981;"></div>
+        <div style="flex:1; background:#059669;"></div>
+      </div>
+      <span style="color:#f87171;">−3%</span>
+      <span>0</span>
+      <span style="color:#00d4a0;">+3%</span>
+    </div>
+  
+    <div style="background:#2d0010; border:1px solid #ff4d6d55; border-radius:8px; padding:16px 20px; margin-bottom:16px; font-size:13px; color:#c0a0a8; display:flex; gap:12px; align-items:flex-start;">
+      <span style="font-size:20px; flex-shrink:0;">🚨</span>
+      <div><strong style="color:#ff4d6d;">Regime Filter Active:</strong> Sector data shown for reference only. No new long positions recommended today based on current market regime.</div>
+    </div><div id="treemap-div" style="width:100%; height:480px; background:var(--bg-card); border-radius:12px; border:1px solid var(--border); opacity:0.6;"></div>
       </div>
 
       
       <div class="section-wrap">
-        <div class="section-title"><span>📈</span> 30-Day Market Breadth Trend</div>
-        <div id="trendChart" style="width: 100%; height: 300px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);"></div>
+        <div class="section-title"><span>📈</span> 30-Day Relative Performance (vs SPY)</div>
+        <div id="trendChart" style="width: 100%; height: 350px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);"></div>
       </div>
       
 
@@ -356,7 +371,7 @@
                 <td>$608</td>
                 <td>24.9</td>
                 <td>23.3</td>
-                <td>3821%</td>
+                <td>38%</td>
                 <td><span class="badge badge-muted">Insufficient Data</span></td>
               </tr>
             
@@ -366,7 +381,7 @@
                 <td>$608</td>
                 <td>24.2</td>
                 <td>24.3</td>
-                <td>3940%</td>
+                <td>39%</td>
                 <td><span class="badge badge-muted">✅ BULLISH — LOOK FOR SETUPS TODAY</span></td>
               </tr>
             
@@ -376,7 +391,7 @@
                 <td>$597</td>
                 <td>27.3</td>
                 <td>25.9</td>
-                <td>3220%</td>
+                <td>32%</td>
                 <td><span class="badge badge-muted">🚨 TECH LAGGING — STAY SIDELINED TODAY</span></td>
               </tr>
             
@@ -397,60 +412,62 @@
     <script>
       am4core.ready(function() {
         am4core.useTheme(am4themes_animated);
-        var chart = am4core.create("treemap-div", am4charts.TreeMap);
-        chart.data = [{"sector":"Technology","ticker":"XLK","value":1.8399999999999999,"dayReturn":"-1.84","ytdReturn":"-4.48","color":"#f87171"},{"sector":"Health Care","ticker":"XLV","value":1.76,"dayReturn":"-1.76","ytdReturn":"-3.44","color":"#f87171"},{"sector":"Financials","ticker":"XLF","value":1.63,"dayReturn":"-1.63","ytdReturn":"-11.11","color":"#f87171"},{"sector":"Consumer Discretionary","ticker":"XLY","value":2.3,"dayReturn":"-2.30","ytdReturn":"-5.77","color":"#dc2626"},{"sector":"Communication Services","ticker":"XLC","value":1.48,"dayReturn":"-1.48","ytdReturn":"-1.39","color":"#f87171"},{"sector":"Industrials","ticker":"XLI","value":2.51,"dayReturn":"-2.51","ytdReturn":"4.60","color":"#dc2626"},{"sector":"Consumer Staples","ticker":"XLP","value":0.4,"dayReturn":"-0.40","ytdReturn":"8.44","color":"#475569"},{"sector":"Energy","ticker":"XLE","value":0.93,"dayReturn":"0.93","ytdReturn":"25.98","color":"#475569"},{"sector":"Utilities","ticker":"XLU","value":0.71,"dayReturn":"0.71","ytdReturn":"7.69","color":"#475569"},{"sector":"Real Estate","ticker":"XLRE","value":0.64,"dayReturn":"-0.64","ytdReturn":"4.36","color":"#475569"},{"sector":"Materials","ticker":"XLB","value":0.32,"dayReturn":"-0.32","ytdReturn":"7.72","color":"#475569"}];
-        chart.colors.step = 2;
-        chart.dataFields.value = "value";
-        chart.dataFields.name = "sector";
-        chart.navigationBar = new am4charts.NavigationBar();
-
-        var level1 = chart.seriesTemplates.create("0");
-        var level1_column = level1.columns.template;
-        level1_column.column.cornerRadius(10, 10, 10, 10);
-        level1_column.fillOpacity = 0.9;
-        level1_column.stroke = am4core.color("#070d1a");
-        level1_column.strokeWidth = 2;
-        level1_column.strokeOpacity = 1;
-
-        level1.dataFields.color = "color";
-
-        var bullet = level1.bullets.push(new am4charts.LabelBullet());
-        bullet.label.text = "[bold]{ticker}[/]\n{dayReturn}%";
-        bullet.label.fill = am4core.color("#ffffff");
-        bullet.label.fontSize = 14;
+        const tmConfig = {
+          "type": "TreeMap",
+          "dataFields": { "value": "marketCap", "name": "sector", "color": "color" },
+          "zoomable": false,
+          "seriesTemplates": {
+            "0": {
+              "type": "TreeMapSeries",
+              "columns": { "template": { "type": "Column", "fillOpacity": 0.95, "strokeOpacity": 1, "stroke": "#070d1a", "strokeWidth": 2 } }
+            }
+          },
+          "data": [{"sector":"Technology","ticker":"XLK","marketCap":29.8,"weight":"29.8","dayReturn":"-1.84","ytdReturn":"-4.48","color":"#f87171"},{"sector":"Health Care","ticker":"XLV","marketCap":12.9,"weight":"12.9","dayReturn":"-1.76","ytdReturn":"-3.44","color":"#f87171"},{"sector":"Financials","ticker":"XLF","marketCap":12.8,"weight":"12.8","dayReturn":"-1.63","ytdReturn":"-11.11","color":"#f87171"},{"sector":"Consumer Discretionary","ticker":"XLY","marketCap":10.3,"weight":"10.3","dayReturn":"-2.30","ytdReturn":"-5.77","color":"#dc2626"},{"sector":"Communication Services","ticker":"XLC","marketCap":8.9,"weight":"8.9","dayReturn":"-1.48","ytdReturn":"-1.39","color":"#f87171"},{"sector":"Industrials","ticker":"XLI","marketCap":8.5,"weight":"8.5","dayReturn":"-2.51","ytdReturn":"+4.60","color":"#dc2626"},{"sector":"Consumer Staples","ticker":"XLP","marketCap":6.1,"weight":"6.1","dayReturn":"-0.40","ytdReturn":"+8.44","color":"#475569"},{"sector":"Energy","ticker":"XLE","marketCap":4.1,"weight":"4.1","dayReturn":"+0.93","ytdReturn":"+25.98","color":"#475569"},{"sector":"Utilities","ticker":"XLU","marketCap":2.4,"weight":"2.4","dayReturn":"+0.71","ytdReturn":"+7.69","color":"#475569"},{"sector":"Real Estate","ticker":"XLRE","marketCap":2.3,"weight":"2.3","dayReturn":"-0.64","ytdReturn":"+4.36","color":"#475569"},{"sector":"Materials","ticker":"XLB","marketCap":2.2,"weight":"2.2","dayReturn":"-0.32","ytdReturn":"+7.72","color":"#475569"}]
+        };
+        const chart = am4core.createFromConfig(tmConfig, "treemap-div", am4charts.TreeMap);
+        const series = chart.seriesTemplates.create("0");
+        const colTemplate = series.columns.template;
+        colTemplate.tooltipText = "[bold fontSize='16px']{sector}[/]\nDay: {dayReturn}%\nYTD: {ytdReturn}%";
+        const bullet = series.bullets.push(new am4charts.LabelBullet());
         bullet.locationX = 0.5;
         bullet.locationY = 0.5;
-
-        colTemplate = level1_column;
-        colTemplate.tooltipText = "[bold fontSize='16px']{sector}[/]\nDay: {dayReturn}%\nYTD: {ytdReturn}%";
-
-        var hoverState = level1_column.states.create("hover");
-        hoverState.properties.fillOpacity = 1;
-        
-        chart.maxLevels = 1;
+        bullet.label.text = "[bold]{sector}[/]\n{dayReturn}%";
+        bullet.label.fill = am4core.color("#ffffff");
+        bullet.label.truncate = true;
+        bullet.label.hideOversized = true;
+        bullet.label.textAlign = "middle";
+        chart.events.on("ready", function() {
+          colTemplate.tooltip = new am4core.Tooltip();
+          colTemplate.tooltip.getFillFromObject = false;
+          colTemplate.tooltip.background.fill = am4core.color("#ffffff");
+          colTemplate.tooltip.background.stroke = am4core.color("#cbd5e1");
+          colTemplate.tooltip.background.strokeWidth = 2;
+          colTemplate.tooltip.label.fill = am4core.color("#0f172a");
+          colTemplate.tooltip.animationDuration = 100;
+        });
       });
 
-      // Plotly Trend Chart
-      const tData = [{"date":"2026-03-10","breadth":38.21},{"date":"2026-03-11","breadth":39.4},{"date":"2026-03-12","breadth":32.2}];
+      // Plotly Relative Performance Chart
+      const tData = [{"date":"2026-01-29","SPY":0,"XLK":0,"XLV":0,"XLF":0,"XLY":0,"XLC":0,"XLI":0,"XLP":0,"XLE":0,"XLU":0,"XLRE":0,"XLB":0},{"date":"2026-01-30","SPY":-0.2982537029565968,"XLK":-2.0358139851569423,"XLV":0.5981016772851566,"XLF":-0.20541549953314586,"XLY":-0.01650301179965119,"XLC":0.24209032473494485,"XLI":-0.25322561196190474,"XLP":1.680262997686599,"XLE":1.0690952286675826,"XLU":-0.18462958689129394,"XLRE":0.14503263234229014,"XLB":-1.4599999999999946},{"date":"2026-02-02","SPY":0.19739496282635827,"XLK":-1.0962075304691288,"XLV":1.2157066701339314,"XLF":0.8963585434173638,"XLY":0.6436174601864852,"XLC":-0.10017530678687603,"XLI":1.0068732666103974,"XLP":2.885669061244367,"XLE":-0.9107107503464662,"XLU":-1.6385875836602781,"XLRE":-0.9910563210055567,"XLB":-0.7000000000000006},{"date":"2026-02-03","SPY":-0.6498184542677587,"XLK":-3.2613876217062687,"XLV":0.18203094526070274,"XLF":-0.037348272642379055,"XLY":-0.1650301179965341,"XLC":-1.71132815760916,"XLI":1.8569878210539015,"XLP":4.553756240107165,"XLE":2.2965749356563148,"XLU":-0.20770828525270568,"XLRE":-1.3536379018612377,"XLB":1.4000000000000012},{"date":"2026-02-04","SPY":-1.131058728603529,"XLK":-5.957649622114792,"XLV":1.436744246521915,"XLF":0.7656395891689982,"XLY":-0.899414143081112,"XLC":-2.496034727439689,"XLI":2.1283009767273375,"XLP":5.917447948374521,"XLE":4.593149871312607,"XLU":-0.5769674590353158,"XLRE":0.2175489485134241,"XLB":3.7800000000000056},{"date":"2026-02-05","SPY":-2.3658578756267645,"XLK":-7.6530264860080415,"XLV":0.6631127291639727,"XLF":-0.48552754435107204,"XLY":-3.03655417113623,"XLC":-2.988563319141846,"XLI":1.5133244905341847,"XLP":5.832217216607827,"XLE":3.3656701643238973,"XLU":-0.5308100623124812,"XLRE":-0.33840947546531774,"XLB":1.0000000000000009},{"date":"2026-02-06","SPY":-0.4927669874935092,"XLK":-3.9082181521073123,"XLV":2.528929918086087,"XLF":1.3258636788048506,"XLY":-2.640481887944557,"XLC":-3.3642207195926255,"XLI":4.413360665621613,"XLP":7.0741507366370415,"XLE":5.42466838249851,"XLU":0.046157396722823485,"XLRE":1.498670534203539,"XLB":3.0200000000000005},{"date":"2026-02-09","SPY":-0.012967552302445284,"XLK":-2.396677333696473,"XLV":1.6252762969704904,"XLF":0.7282913165266081,"XLY":-3.0035481475369274,"XLC":-2.4292511895817714,"XLI":4.7268780899553775,"XLP":6.453183976622445,"XLE":6.196792714313992,"XLU":0.34618047542118724,"XLRE":2.1271452743534036,"XLB":4.360000000000008},{"date":"2026-02-10","SPY":-0.27664111578582506,"XLK":-2.941376727718381,"XLV":0.9816668833701803,"XLF":0,"XLY":-2.359930687350442,"XLC":-1.8448952333249946,"XLI":4.853490895936319,"XLP":6.112261049555601,"XLE":6.078004355573152,"XLU":2.0078467574428993,"XLRE":3.5532994923858086,"XLB":5.820000000000003},{"date":"2026-02-11","SPY":-0.2996945421013142,"XLK":-2.6554095458568794,"XLV":1.5797685606553147,"XLF":-1.5126050420168013,"XLY":-2.8302665236405566,"XLC":-2.546122380833138,"XLI":5.414204750994811,"XLP":7.634238402532589,"XLE":8.849732726192826,"XLU":2.9079159935379684,"XLRE":3.456611070824267,"XLB":7.240000000000002},{"date":"2026-02-12","SPY":-1.8399515878047334,"XLK":-5.215496697759924,"XLV":1.4172409309582745,"XLF":-3.4733893557422957,"XLY":-4.175261985312318,"XLC":-4.2991902496034795,"XLI":4.154105872422509,"XLP":8.620479727261653,"XLE":6.869926747178767,"XLU":4.431110085391188,"XLRE":3.6258158085569203,"XLB":5.659999999999998},{"date":"2026-02-13","SPY":-1.7707913088582772,"XLK":-4.977190712875334,"XLV":2.5029254973345516,"XLF":-3.548085901027076,"XLY":-4.134004455813178,"XLC":-4.349277902996917,"XLI":5.010249608103212,"XLP":8.985754291976145,"XLE":7.6024549594139845,"XLU":7.315947380567733,"XLRE":5.148658448150845,"XLB":6.620000000000004},{"date":"2026-02-17","SPY":-1.6122990029392992,"XLK":-5.0316606522775364,"XLV":2.3078923416981034,"XLF":-2.5210084033613356,"XLY":-4.249525538410747,"XLC":-4.499540863177232,"XLI":5.558905100687328,"XLP":7.390722026056262,"XLE":6.41457137200554,"XLU":7.039003000230792,"XLRE":6.212231085327535,"XLB":5.400000000000005},{"date":"2026-02-18","SPY":-1.1166503371563552,"XLK":-4.0580104854633365,"XLV":2.5029254973345516,"XLF":-1.7927170868347275,"XLY":-3.4408779602277395,"XLC":-4.340929960764672,"XLI":5.534788375738553,"XLP":7.195908924875205,"XLE":8.45377153039002,"XLU":5.261943226402033,"XLRE":4.786076867295153,"XLB":6.040000000000001},{"date":"2026-02-19","SPY":-1.3774422223502891,"XLK":-4.534622455232517,"XLV":2.2363801846313924,"XLF":-2.614379084967322,"XLY":-4.084495420414225,"XLC":-3.881793137991485,"XLI":6.318581936572998,"XLP":6.74540362839402,"XLE":9.245693921995656,"XLU":6.415878144472664,"XLRE":4.4234952864394605,"XLB":5.659999999999998},{"date":"2026-02-20","SPY":-0.6642268457149436,"XLK":-4.078436712739164,"XLV":1.9503315563645929,"XLF":-1.9794584500466783,"XLY":-3.0860632065351834,"XLC":-2.496034727439689,"XLI":6.855179066682737,"XLP":7.013271642517971,"XLE":8.651752128291434,"XLU":6.923609508423723,"XLRE":5.2936910804931125,"XLB":5.919999999999992},{"date":"2026-02-23","SPY":-1.6785776035963318,"XLK":-5.685299925103826,"XLV":3.068521648680278,"XLF":-5.266106442577034,"XLY":-5.115933657892569,"XLC":-3.6981384088822122,"XLI":5.408175569757634,"XLP":8.328260075490078,"XLE":9.186299742625215,"XLU":7.731363951073167,"XLRE":5.414551607445017,"XLB":5.919999999999992},{"date":"2026-02-24","SPY":-0.9639213878162578,"XLK":-4.459726288554511,"XLV":2.6329476010921837,"XLF":-4.799253034547157,"XLY":-3.6719201254228895,"XLC":-3.0303030303030387,"XLI":6.704449535753021,"XLP":9.265798124923897,"XLE":9.08730944367453,"XLU":8.931456265866622,"XLRE":5.704616872129553,"XLB":6.719999999999993},{"date":"2026-02-25","SPY":-0.1282346838798909,"XLK":-2.628174576155795,"XLV":2.6069431803406706,"XLF":-3.1372549019607843,"XLY":-3.3831174189289492,"XLC":-2.746472994406879,"XLI":5.872422525021093,"XLP":8.37696335078535,"XLE":8.63195406850128,"XLU":9.30071543964921,"XLRE":5.0036258158085545,"XLB":6.120000000000014},{"date":"2026-02-26","SPY":-0.6829577545962806,"XLK":-3.9899230612105985,"XLV":2.3403978676374892,"XLF":-1.9607843137254832,"XLY":-3.4161234425282627,"XLC":-2.562818265297606,"XLI":6.535632461111773,"XLP":8.194326068428115,"XLE":8.988319144723821,"XLU":8.885298869143776,"XLRE":5.462895818225788,"XLB":6.000000000000005},{"date":"2026-02-27","SPY":-1.1598755114978876,"XLK":-5.521890106897265,"XLV":4.147705109868682,"XLF":-3.9589169000933677,"XLY":-3.5729020546249712,"XLC":-1.4525419484097246,"XLI":6.800916435548032,"XLP":9.59454523316694,"XLE":10.710750346466046,"XLU":10.154627279021454,"XLRE":5.970510031423748,"XLB":6.820000000000004},{"date":"2026-03-02","SPY":-1.1036827848538988,"XLK":-4.990808197725894,"XLV":3.0620205434924053,"XLF":-4.201680672268903,"XLY":-4.761118904200012,"XLC":-1.6028049085900387,"XLI":7.862052333293135,"XLP":8.01168878607086,"XLE":12.928133042961786,"XLU":9.32379413801061,"XLRE":6.163886874546787,"XLB":6.499999999999995},{"date":"2026-03-03","SPY":-1.9753904674082112,"XLK":-6.379791652481792,"XLV":1.8983227148615445,"XLF":-4.369747899159659,"XLY":-5.635778529581648,"XLC":-1.5276734284998872,"XLI":5.775955625226081,"XLP":6.8306343601607145,"XLE":11.898633933874493,"XLU":8.631433187168259,"XLRE":5.632100555958441,"XLB":3.8799999999999946},{"date":"2026-03-04","SPY":-1.2837876779436264,"XLK":-4.786545924967656,"XLV":2.0998569756858876,"XLF":-3.828197945845002,"XLY":-3.9607228319168186,"XLC":-0.834794223223978,"XLI":6.095502230797045,"XLP":6.1244368683794015,"XLE":11.24529796079985,"XLU":9.093007154396492,"XLRE":5.777133188300709,"XLB":3.839999999999999},{"date":"2026-03-05","SPY":-1.834188231225864,"XLK":-4.555048682508334,"XLV":0.05850994669094334,"XLF":-4.332399626517269,"XLY":-3.828698737519598,"XLC":-1.126972201352372,"XLI":3.738092367056556,"XLP":3.9936685742116174,"XLE":11.819441694713916,"XLU":8.239095315024226,"XLRE":4.761904761904767,"XLB":1.6599999999999948},{"date":"2026-03-06","SPY":-3.120857587458936,"XLK":-6.522775243412548,"XLV":-0.7281237810427776,"XLF":-5.564892623716144,"XLY":-5.569766482383032,"XLC":-1.9450705401118706,"XLI":2.4599059447727,"XLP":4.4441738706928025,"XLE":11.9976242328252,"XLU":7.869836141241637,"XLRE":3.674160019337691,"XLB":-0.28000000000000247},{"date":"2026-03-09","SPY":-2.2722033312201018,"XLK":-4.841015864369858,"XLV":0.28604862826679955,"XLF":-6.013071895424837,"XLY":-5.445993893885626,"XLC":-1.8615911177894628,"XLI":3.0628240684914987,"XLP":4.6755144283453065,"XLE":11.502672738071684,"XLU":8.123701823217178,"XLRE":3.891708967851093,"XLB":-0.019999999999997797},{"date":"2026-03-10","SPY":-2.4292547979943513,"XLK":-4.841015864369858,"XLV":-0.43557404758808316,"XLF":-6.517273576097093,"XLY":-5.569766482383032,"XLC":-2.011854077969788,"XLI":2.5081393946702057,"XLP":4.371118957749909,"XLE":10.07721243318156,"XLU":7.454419570736226,"XLRE":3.746676335508825,"XLB":-0.23999999999999577},{"date":"2026-03-11","SPY":-2.5517261252953616,"XLK":-4.384830121876493,"XLV":-0.6306072032245424,"XLF":-7.301587301587298,"XLY":-5.8173116593778325,"XLC":-2.3290758827948954,"XLI":2.188592789099242,"XLP":2.9952514306587297,"XLE":12.809344684220946,"XLU":6.554350334641135,"XLRE":2.513898960599459,"XLB":-0.31999999999999806},{"date":"2026-03-12","SPY":-4.03146792692064,"XLK":-6.14829441002247,"XLV":-2.379404498764792,"XLF":-8.81419234360411,"XLY":-7.979206205132439,"XLC":-3.773269888972375,"XLI":-0.3738092367056578,"XLP":2.581273590648969,"XLE":13.858641853098398,"XLU":7.315947380567733,"XLRE":1.861252115059231,"XLB":-0.6399999999999961}];
       if (tData.length > 0) {
-        const trace = {
+        const tickers = ['SPY', ...["XLK","XLV","XLF","XLY","XLC","XLI","XLP","XLE","XLU","XLRE","XLB"]];
+        const colors = ['#ffffff', '#00d4a0', '#ff4d6d', '#ffd166', '#ff9f43', '#4d96ff', '#9b59b6', '#1abc9c', '#e67e22', '#34495e', '#ecf0f1', '#95a5a6'];
+        const traces = tickers.map((ticker, i) => ({
           x: tData.map(d => d.date),
-          y: tData.map(d => d.breadth * 100),
+          y: tData.map(d => d[ticker]),
           type: 'scatter',
-          mode: 'lines+markers',
-          name: 'Breadth',
-          line: { color: '#00d4a0', width: 3, shape: 'spline' },
-          marker: { size: 6, color: '#070d1a', line: { color: '#00d4a0', width: 2 } },
-          fill: 'tozeroy',
-          fillcolor: 'rgba(0, 212, 160, 0.1)'
-        };
+          mode: 'lines',
+          name: ticker,
+          line: { color: colors[i % colors.length], width: ticker === 'SPY' ? 4 : 2, dash: ticker === 'SPY' ? 'solid' : 'dot' }
+        }));
         const layout = {
           paper_bgcolor: 'rgba(0,0,0,0)',
           plot_bgcolor: 'rgba(0,0,0,0)',
           font: { color: '#e2eaf5', family: 'JetBrains Mono, monospace' },
           margin: { l: 40, r: 20, t: 10, b: 40 },
           height: 300,
-          showlegend: false,
+          showlegend: true,
+          legend: { orientation: 'h', y: -0.2, font: { size: 10 } },
           xaxis: { 
             gridcolor: '#1e3050', zeroline: false, 
             tickfont: { color: '#4a6080', size: 10 },
@@ -463,7 +480,7 @@
             ticksuffix: '%'
           }
         };
-        Plotly.newPlot('trendChart', [trace], layout, { displayModeBar: false, responsive: true });
+        Plotly.newPlot('trendChart', traces, layout, { displayModeBar: false, responsive: true });
       }
     </script>
   
