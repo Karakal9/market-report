@@ -272,7 +272,19 @@
       </div>
 
       <div class="section-wrap">
-        <div class="section-title"><span>🔥</span> Sector Performance Heatmap</div>
+        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>🔥</span> SECTOR PERFORMANCE HEATMAP</div>
+        
+        
+        <div style="background: var(--red-dim); border: 1px solid var(--red); border-radius: 8px; padding: 16px; margin-bottom: 20px; font-size: 13px; line-height: 1.5; color:var(--text);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="font-size:20px; line-height:1;">🚨</span>
+            <div>
+              <b style="color:var(--red);">Regime Filter Active:</b> Market is in 🚨 TECH LAGGING — STAY SIDELINED TODAY state. All sectors shown for reference only. No new long positions are recommended today. The single exception: <b style="color:var(--green);">Energy (XLE)</b> shows structural strength but confirm with tight risk management only.
+            </div>
+          </div>
+        </div>
+        
+
         
     <div style="display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:10px; font-size:11px; color:#4a6080;">
       <span>Day return:</span>
@@ -298,225 +310,350 @@
 
       
       <div class="section-wrap">
-        <div class="section-title"><span>📈</span> 30-Day Relative Performance (vs SPY)</div>
+        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>📈</span> 30-DAY RELATIVE PERFORMANCE</div>
         <div id="trendChart" style="width: 100%; height: 350px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);"></div>
       </div>
       
 
       <div class="section-wrap">
-        <div class="section-title"><span>📊</span> Sector Momentum Rankings</div>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
+          <div class="section-title" style="letter-spacing:1px; font-size:12px; border:none; padding:0; margin:0;"><span>📊</span> MOMENTUM ANALYSIS</div>
+          <div style="font-size:10px; font-family:var(--mono); color:var(--red); font-weight:700; letter-spacing:0.05em; opacity:0.8;"><span style="display:inline-block; width:10px; height:10px; background:var(--bg-deep); border:1px solid var(--muted); vertical-align:middle; margin-right:6px; border-radius:2px;"></span> DIMMED = SUPPRESSED BY REGIME FILTER</div>
+        </div>
         <table class="momentum-table">
           <thead>
             <tr>
               <th style="text-align: left;">Sector</th>
-              <th>Daily</th>
-              <th>10D</th>
-              <th>20D</th>
-              <th>Vol</th>
+              <th>Last 10D</th>
+              <th>Last 20D</th>
+              <th>Momentum</th>
+              <th>Volume</th>
               <th>Opp</th>
-              <th>RSI (14)</th>
-              <th>Trend</th>
+              <th>Rev</th>
+              <th>RSI</th>
             </tr>
           </thead>
           <tbody>
             
-              <tr>
-                <td>Energy <span class="ticker-tag">XLE</span></td>
-                <td style="color: var(--green)">+0.93%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">GOOD</span></td>
-                <td><span class="badge badge-blue">69.5</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Technology</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLK</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">43.83</td>
               </tr>
             
-              <tr>
-                <td>Utilities <span class="ticker-tag">XLU</span></td>
-                <td style="color: var(--green)">+0.71%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">56.4</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Health Care</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLV</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">33.98</td>
               </tr>
             
-              <tr>
-                <td>Materials <span class="ticker-tag">XLB</span></td>
-                <td style="color: var(--red)">-0.32%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">36.9</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Financials</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLF</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">28.80</td>
               </tr>
             
-              <tr>
-                <td>Consumer Staples <span class="ticker-tag">XLP</span></td>
-                <td style="color: var(--red)">-0.40%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">38.8</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Consumer Discretionary</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLY</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">31.05</td>
               </tr>
             
-              <tr>
-                <td>Real Estate <span class="ticker-tag">XLRE</span></td>
-                <td style="color: var(--red)">-0.64%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">40.6</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Communication Services</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLC</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">41.23</td>
               </tr>
             
-              <tr>
-                <td>Communication Services <span class="ticker-tag">XLC</span></td>
-                <td style="color: var(--red)">-1.48%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">41.2</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Industrials</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLI</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">35.45</td>
               </tr>
             
-              <tr>
-                <td>Financials <span class="ticker-tag">XLF</span></td>
-                <td style="color: var(--red)">-1.63%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-green">28.8</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Consumer Staples</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLP</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">38.80</td>
               </tr>
             
-              <tr>
-                <td>Health Care <span class="ticker-tag">XLV</span></td>
-                <td style="color: var(--red)">-1.76%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">34.0</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Energy</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLE</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-green">GOOD</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">69.47</td>
               </tr>
             
-              <tr>
-                <td>Technology <span class="ticker-tag">XLK</span></td>
-                <td style="color: var(--red)">-1.84%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">43.8</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Utilities</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLU</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">56.38</td>
               </tr>
             
-              <tr>
-                <td>Consumer Discretionary <span class="ticker-tag">XLY</span></td>
-                <td style="color: var(--red)">-2.30%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">31.0</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Real Estate</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLRE</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">40.56</td>
               </tr>
             
-              <tr>
-                <td>Industrials <span class="ticker-tag">XLI</span></td>
-                <td style="color: var(--red)">-2.51%</td>
-                <td style="color: var(--muted)">-</td>
-                <td style="color: var(--muted)">-</td>
-                <td><span class="badge badge-muted">-</span></td>
-                <td><span class="blue">MODERATE</span></td>
-                <td><span class="badge badge-blue">35.5</span></td>
-                <td>⚪</td>
+              <tr style="opacity: 0.35;">
+                <td style="border-left: 2px solid transparent;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:14px; color:var(--muted);">Materials</span>
+                    
+                  </div>
+                  <span class="ticker-tag">XLB</span>
+                </td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
+                <td><span class="badge badge-muted">NEUTRAL</span></td>
+                <td><span class="badge badge-green">HIGH</span></td>
+                <td><span class="badge badge-yellow">MODERATE</span></td>
+                <td><span class="badge badge-muted">NONE</span></td>
+                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">36.87</td>
               </tr>
             
           </tbody>
         </table>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px;">
-        <div>
-          <div class="section-title"><span>🎯</span> Potential Long Setups</div>
-          
-        <div class="setup-card suppressed">
-          <div class="setup-overlay">🚫 SUPPRESSED BY REGIME</div>
-          <div class="setup-type">🔵 Qullamaggie Breakouts </div>
-          <div class="setup-sector"><span>🏢</span> Energy / Strong Uptrend</div>
-          <div class="setup-body">Sector is experiencing explosive momentum but is not yet exhausted. Institutional money is actively supporting the trend.</div>
-          <div class="setup-data">
-            <div><div class="setup-stat-label">Mom(20D)</div><div class="setup-stat-val">6.5%</div></div>
-            <div><div class="setup-stat-label">RSI</div><div class="setup-stat-val">69.0</div></div>
-            <div><div class="setup-stat-label">Dist 50MA</div><div class="setup-stat-val">11.9%</div></div>
-            <div><div class="setup-stat-label">Status</div><div class="setup-stat-val" style="color:#ff4d6d">SUPPRESSED</div></div>
+      <div class="section-wrap">
+        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>🔴</span> SECTORS TO AVOID</div>
+        
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Technology <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
           </div>
-          <div class="setup-action">⚡ <strong>Action:</strong> Open your stock screener and filter for stocks in this sector with high Relative Strength forming tight flags or episodic pivots. Buy the breakout.</div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        <div class="setup-card suppressed">
-          <div class="setup-overlay">🚫 SUPPRESSED BY REGIME</div>
-          <div class="setup-type">🟢 50 MA Pullbacks </div>
-          <div class="setup-sector"><span>🏢</span> Real Estate / Moderate Uptrend</div>
-          <div class="setup-body">Sector is in a long-term uptrend but is currently resting. Price is testing the 50 SMA and RSI has cooled off.</div>
-          <div class="setup-data">
-            <div><div class="setup-stat-label">Mom(20D)</div><div class="setup-stat-val">-1.7%</div></div>
-            <div><div class="setup-stat-label">RSI</div><div class="setup-stat-val">41.0</div></div>
-            <div><div class="setup-stat-label">Dist 50MA</div><div class="setup-stat-val">0.2%</div></div>
-            <div><div class="setup-stat-label">Status</div><div class="setup-stat-val" style="color:#ff4d6d">SUPPRESSED</div></div>
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Health Care <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
           </div>
-          <div class="setup-action">⚡ <strong>Action:</strong> Scan this sector for stocks successfully testing their 50-day moving averages on low volume. Buy the bounce.</div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        </div>
-        <div>
-          <div class="section-title"><span>⚠️</span> Sectors to Avoid</div>
-          
-        <div class="avoid-card">
-          <div class="avoid-name">Technology</div>
-          <div class="avoid-reason">Structural Breakdown</div>
-        </div>
-      
-        <div class="avoid-card">
-          <div class="avoid-name">Health Care</div>
-          <div class="avoid-reason">Structural Breakdown</div>
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Financials <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
+          </div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        <div class="avoid-card">
-          <div class="avoid-name">Financials</div>
-          <div class="avoid-reason">Structural Breakdown</div>
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Consumer Discretionary <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
+          </div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        <div class="avoid-card">
-          <div class="avoid-name">Consumer Discretionary</div>
-          <div class="avoid-reason">Structural Breakdown</div>
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Industrials <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
+          </div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        <div class="avoid-card">
-          <div class="avoid-name">Industrials</div>
-          <div class="avoid-reason">Structural Breakdown</div>
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Consumer Staples <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
+          </div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        <div class="avoid-card">
-          <div class="avoid-name">Consumer Staples</div>
-          <div class="avoid-reason">Structural Breakdown</div>
+        <div class="avoid-card" style="border-left-color: var(--red);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Materials <span class="badge badge-red">DISTRIBUTION</span></div>
+              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
+          </div>
+          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
         </div>
       
-        <div class="avoid-card">
-          <div class="avoid-name">Materials</div>
-          <div class="avoid-reason">Structural Breakdown</div>
+      </div>
+
+      <div class="section-wrap">
+        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>🎯</span> TOP-DOWN SCAN ENVIRONMENTS</div>
+        
+        
+        <div style="background: var(--red-dim); border: 1px solid var(--red); border-radius: 8px; padding: 16px; margin-bottom: 20px; font-size: 13px; line-height: 1.5; color:var(--text);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="font-size:20px; line-height:1;">🚫</span>
+            <div>
+              <b style="color:var(--red);">All breakout and momentum setups are suppressed.</b> Regime verdict is 🚨 TECH LAGGING — STAY SIDELINED TODAY. Breakouts require a confirmed bullish regime — they are filtered out today. Only Mean Reversion setups are shown where applicable.
+            </div>
+          </div>
+        </div>
+        
+
+        
+        <div class="setup-card" style="border-left-color: var(--muted); opacity: 0.5; position: relative; overflow: hidden;">
+          <div style="position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg-card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 700; color:var(--red); z-index:10; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family:var(--mono);">🚫 SUPPRESSED BY REGIME</div>
+          <div style="opacity: 0.4;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
+                  <div>
+                      <div style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; display:flex; align-items:center; gap:8px;">🔵 Qullamaggie Breakouts <span class="badge badge-muted">SUPPRESSED</span></div>
+                      <div style="font-size: 13px; color: var(--muted);">Energy / Strong Uptrend</div>
+                  </div>
+                  <div style="text-align:right;">
+                      <div style="font-family: var(--mono); font-size: 18px; font-weight: 700; color:var(--green);">+6.5%</div>
+                      <div style="font-size: 10px; color: var(--muted); text-transform:uppercase; letter-spacing:0.05em;">20D Mom</div>
+                  </div>
+              </div>
+              <div style="font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 16px;">
+                  Sector is experiencing explosive momentum but is not yet exhausted. Institutional money is actively supporting the trend.
+              </div>
+              <div style="display:flex; gap:24px; border-top: 1px solid var(--border); padding-top:12px; margin-bottom: 16px;">
+                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Dist to 20MA</div><div style="font-family:var(--mono); font-size:14px; color:var(--green);">+11.9%</div></div>
+                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Trend</div><div style="font-family:var(--mono); font-size:14px; color:var(--text);">NEUTRAL</div></div>
+              </div>
+              <div style="background: var(--bg-deep); padding: 12px; border-radius: 6px; font-size: 13px; color:var(--text); border:1px solid var(--border);">
+                  <strong style="color:var(--text); margin-right:8px;">⚡ ACTION</strong> Open your stock screener and filter for stocks in this sector with high Relative Strength forming tight flags or episodic pivots. Buy the breakout.
+              </div>
+          </div>
         </div>
       
+        <div class="setup-card" style="border-left-color: var(--muted); opacity: 0.5; position: relative; overflow: hidden;">
+          <div style="position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg-card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 700; color:var(--red); z-index:10; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family:var(--mono);">🚫 SUPPRESSED BY REGIME</div>
+          <div style="opacity: 0.4;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
+                  <div>
+                      <div style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; display:flex; align-items:center; gap:8px;">🟢 50 MA Pullbacks <span class="badge badge-muted">SUPPRESSED</span></div>
+                      <div style="font-size: 13px; color: var(--muted);">Real Estate / Moderate Uptrend</div>
+                  </div>
+                  <div style="text-align:right;">
+                      <div style="font-family: var(--mono); font-size: 18px; font-weight: 700; color:var(--red);">-1.7%</div>
+                      <div style="font-size: 10px; color: var(--muted); text-transform:uppercase; letter-spacing:0.05em;">20D Mom</div>
+                  </div>
+              </div>
+              <div style="font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 16px;">
+                  Sector is in a long-term uptrend but is currently resting. Price is testing the 50 SMA and RSI has cooled off.
+              </div>
+              <div style="display:flex; gap:24px; border-top: 1px solid var(--border); padding-top:12px; margin-bottom: 16px;">
+                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Dist to 20MA</div><div style="font-family:var(--mono); font-size:14px; color:var(--green);">+0.2%</div></div>
+                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Trend</div><div style="font-family:var(--mono); font-size:14px; color:var(--text);">NEUTRAL</div></div>
+              </div>
+              <div style="background: var(--bg-deep); padding: 12px; border-radius: 6px; font-size: 13px; color:var(--text); border:1px solid var(--border);">
+                  <strong style="color:var(--text); margin-right:8px;">⚡ ACTION</strong> Scan this sector for stocks successfully testing their 50-day moving averages on low volume. Buy the bounce.
+              </div>
+          </div>
         </div>
+      
       </div>
 
       
