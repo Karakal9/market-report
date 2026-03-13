@@ -2,137 +2,272 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap');
       :root {
-        --bg-deep: #070d1a; --bg-card: #0d1626; --bg-raised: #111f35; --border: #1e3050;
-        --text: #e2eaf5; --muted: #4a6080; --green: #00d4a0; --green-dim: #002e22;
-        --red: #ff4d6d; --red-dim: #2d0010; --yellow: #ffd166; --yellow-dim: #2d2000;
-        --orange: #ff9f43; --blue: #4da6ff; --mono: 'JetBrains Mono', monospace; --sans: 'Syne', sans-serif;
+        --bg-deep:   #070d1a;
+        --bg-card:   #0d1626;
+        --bg-raised: #111f35;
+        --border:    #1e3050;
+        --text:      #e2eaf5;
+        --muted:     #4a6080;
+        --green:     #00d4a0;
+        --green-dim: #002e22;
+        --red:       #ff4d6d;
+        --red-dim:   #2d0010;
+        --yellow:    #ffd166;
+        --yellow-dim:#2d2000;
+        --orange:    #ff9f43;
+        --blue:      #4da6ff;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Syne', sans-serif;
       }
+
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body { font-family: var(--sans); background: var(--bg-deep); color: var(--text); padding: 28px 16px 80px; }
       .page { max-width: 980px; margin: 0 auto; }
-      .report-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 36px; }
+
+      /* ── HEADER ── */
+      .report-header {
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 20px; margin-bottom: 36px;
+      }
       .report-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
       .report-meta { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
-      .section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+
+      /* ── SECTION TITLES ── */
+      .section-title {
+        font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--muted);
+        margin-bottom: 14px; padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; gap: 8px;
+      }
       .section-wrap { margin-bottom: 40px; }
-      .regime-banner { border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-      .regime-banner.sidelined { background: var(--red-dim); border: 1px solid var(--red); }
-      .regime-banner.bearish { background: #1a0a00; border: 1px solid var(--orange); }
-      .regime-banner.choppy { background: var(--yellow-dim); border: 1px solid var(--yellow); }
-      .regime-banner.bullish { background: var(--green-dim); border: 1px solid var(--green); }
-      .regime-banner.unknown { background: var(--bg-card); border: 1px solid var(--border); }
-      .regime-banner-verdict { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+
+      /* ── REGIME ALERT BANNER ── */
+      .regime-banner {
+        background: var(--red-dim);
+        border: 1px solid var(--red);
+        border-radius: 10px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      }
+      .regime-banner.sidelined { background: var(--red-dim); border-color: var(--red); }
+      .regime-banner.bearish { background: #1a0a00; border-color: var(--orange); }
+      .regime-banner.choppy { background: var(--yellow-dim); border-color: var(--yellow); }
+      .regime-banner.bullish { background: var(--green-dim); border-color: var(--green); }
+      .regime-banner.unknown { background: var(--bg-card); border-color: var(--border); }
+      
+      .regime-banner-left { flex: 1; }
+      .regime-banner-emoji { font-size: 28px; margin-bottom: 4px; }
+      .regime-banner-verdict { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
       .regime-banner.sidelined .regime-banner-verdict { color: var(--red); }
       .regime-banner.bearish .regime-banner-verdict { color: var(--orange); }
       .regime-banner.choppy .regime-banner-verdict { color: var(--yellow); }
       .regime-banner.bullish .regime-banner-verdict { color: var(--green); }
-      .regime-banner-sub { font-size: 13px; color: #8090a8; }
-      .strategy-pill { font-family: var(--mono); font-size: 12px; font-weight: 700; border-radius: 999px; padding: 8px 18px; white-space: nowrap; }
-      .sidelined .strategy-pill { background: #3d0015; color: var(--red); border: 1px solid var(--red); }
-      .bearish .strategy-pill { background: #2d1500; color: var(--orange); border: 1px solid var(--orange); }
-      .choppy .strategy-pill { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow); }
-      .bullish .strategy-pill { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
-      .regime-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-      .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+      .regime-banner-sub { font-size: 13px; color: #c0a0a8; }
+      .regime-strategy-pill {
+        font-family: var(--mono); font-size: 12px; font-weight: 700;
+        background: var(--bg-card); color: var(--text);
+        border: 1px solid var(--border); border-radius: 999px;
+        padding: 8px 18px; white-space: nowrap;
+      }
+      .sidelined .regime-strategy-pill { background: #3d0015; color: var(--red); border-color: var(--red); }
+      .bearish .regime-strategy-pill { background: #2d1500; color: var(--orange); border-color: var(--orange); }
+      .choppy .regime-strategy-pill { background: var(--yellow-dim); color: var(--yellow); border-color: var(--yellow); }
+      .bullish .regime-strategy-pill { background: var(--green-dim); color: var(--green); border-color: var(--green); }
+      /* ── REGIME METRICS GRID ── */
+      .regime-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+        margin-bottom: 20px;
+      }
+      .metric-card {
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: 8px; padding: 14px 16px;
+      }
       .metric-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
       .metric-val { font-family: var(--mono); font-size: 22px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
       .metric-sub { font-size: 11px; color: var(--muted); line-height: 1.6; }
       .metric-sub b { color: var(--text); }
-      .breadth-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 20px; }
-      .breadth-track { height: 8px; border-radius: 4px; background: var(--border); position: relative; overflow: visible; margin-bottom: 4px; }
-      .breadth-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--red) 0%, var(--yellow) 40%, var(--green) 100%); }
+      .green { color: var(--green); }
+      .red   { color: var(--red); }
+      .yellow { color: var(--yellow); }
+      .orange { color: var(--orange); }
+
+      /* Breadth bar */
+      .breadth-card {
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;
+      }
+      .breadth-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+      .breadth-track {
+        height: 8px; border-radius: 4px; background: var(--border);
+        position: relative; overflow: visible; margin-bottom: 4px;
+      }
+      .breadth-fill {
+        height: 100%; border-radius: 4px;
+        background: linear-gradient(90deg, var(--red) 0%, var(--yellow) 50%, var(--green) 100%);
+      }
+      .breadth-marker {
+        position: absolute; top: -4px;
+        width: 16px; height: 16px; border-radius: 50%;
+        background: var(--yellow); border: 2px solid var(--bg-deep);
+      }
       .breadth-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); font-family: var(--mono); margin-top: 6px; }
+
+      /* Regime history table */
       .history-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-      .history-table th { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--border); }
-      .history-table td { font-family: var(--mono); font-size: 12px; padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); }
-      .history-table tr.latest td { background: #0d1a2d; }
+      .history-table th {
+        font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--muted);
+        padding: 8px 12px; text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .history-table td {
+        font-family: var(--mono); font-size: 12px;
+        padding: 10px 12px; text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .history-table tr:last-child td { background: #0d1a2d; }
+      .latest-marker { font-size: 10px; color: var(--yellow); margin-left: 4px; }
       .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 10px; font-weight: 700; }
       .badge-green { background: var(--green-dim); color: var(--green); border: 1px solid #00d4a033; }
       .badge-red { background: var(--red-dim); color: var(--red); border: 1px solid #ff4d6d33; }
       .badge-yellow { background: var(--yellow-dim); color: var(--yellow); border: 1px solid #ffd16633; }
       .badge-blue { background: #001a3d; color: var(--blue); border: 1px solid #4da6ff33; }
       .badge-muted { background: var(--bg-card); color: var(--muted); border: 1px solid var(--border); }
-      .momentum-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-      .momentum-table th { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); }
-      .momentum-table td { padding: 11px 12px; text-align: center; border-bottom: 1px solid var(--border); font-size: 13px; }
+
+      /* Momentum Table */
+      .momentum-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+      .momentum-table th {
+        font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--muted);
+        padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border);
+      }
+      .momentum-table td { padding: 11px 12px; text-align: center; border-bottom: 1px solid var(--border); }
       .momentum-table td:first-child { text-align: left; font-weight: 600; }
-      .momentum-table .ticker-tag { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; }
-      .setup-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin-bottom: 12px; position: relative; }
+      .ticker-tag { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
+      .energy-row td { background: rgba(255,159,67,0.05); }
+
+      /* Setup Cards */
+      .setup-card {
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: 10px; padding: 20px 22px; margin-bottom: 12px; position: relative;
+      }
       .setup-card.active { border-color: var(--green); }
       .setup-card.warn { border-color: #ffd16688; }
       .setup-card.suppressed { opacity: 0.35; }
-      .setup-overlay { position: absolute; inset: 0; border-radius: 10px; background: rgba(7,13,26,0.80); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--red); letter-spacing: 0.1em; font-family: var(--mono); }
-      .setup-type { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-      .setup-sector { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
-      .setup-body { font-size: 13px; color: #8090a8; line-height: 1.6; margin-bottom: 12px; }
-      .setup-data { background: var(--bg-deep); border-radius: 6px; padding: 12px 14px; display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 12px; }
+      
+      .setup-overlay {
+        position: absolute; inset: 0; border-radius: 10px;
+        background: rgba(7,13,26,0.80);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 12px; font-weight: 700; color: var(--red);
+        letter-spacing: 0.1em; font-family: var(--mono);
+      }
+
+      .setup-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+      .setup-type { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+      .setup-sector { font-size: 12px; color: var(--muted); }
+      .setup-action { font-size: 13px; color: var(--text); padding-top: 4px; }
+      
+      .setup-data {
+        background: var(--bg-deep); border-radius: 6px; padding: 12px 14px;
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;
+      }
       .setup-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
       .setup-stat-val { font-family: var(--mono); font-size: 14px; font-weight: 600; }
-      .setup-action { font-size: 13px; color: var(--text); }
-      .setup-action strong { color: var(--yellow); }
-      .avoid-card { background: var(--bg-card); border-left: 4px solid var(--red); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 10px; }
+      
+      .setup-body { font-size: 13px; color: #8090a8; line-height: 1.6; }
+
+      /* Avoid Cards */
+      .avoid-card {
+        background: var(--bg-card);
+        border-left: 4px solid var(--red);
+        border-radius: 0 8px 8px 0;
+        padding: 14px 18px; margin-bottom: 10px;
+      }
       .avoid-name { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
       .avoid-reason { font-size: 13px; color: #8090a8; }
+      
+      /* Status Dots */
+      .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+      .dot-green { background: var(--green); box-shadow: 0 0 8px var(--green-dim); }
+      .dot-red { background: var(--red); box-shadow: 0 0 8px var(--red-dim); }
+      .dot-yellow { background: var(--yellow); box-shadow: 0 0 8px var(--yellow-dim); }
+      .dot-blue { background: var(--blue); }
+      .dot-gray { background: var(--muted); }
+
       .footer { text-align: center; padding-top: 40px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
       a { color: var(--blue); text-decoration: none; }
     </style>
   </head><body>
     <div class="page">
-      <div class="report-header">
-        <div>
-          <div style="font-size:11px; font-family:var(--mono); color:var(--muted); margin-bottom:6px; letter-spacing:0.1em;">SECTOR MOMENTUM ANALYSIS</div>
-          <div class="report-title">Daily Market Report</div>
-        </div>
-        <div class="report-meta">
-          <div>Session: <b style="color:var(--text)">12 Mar 2026</b></div>
-          <div>Generated pre-market</div>
-          <div style="margin-top:4px;">
-            <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#ff4d6d; box-shadow:0 0 5px #ff4d6d; margin-right:5px; vertical-align:middle;"></span>
-            Regime: <span style="color:#ff4d6d; font-weight:700;">SIDELINED</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-wrap">
+      <div class="section-wrap" style="margin-top:20px;">
+        <div class="section-title" style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px; font-size:12px; letter-spacing:1px;"><span>🧭</span> MARKET REGIME</div>
+        
         <div class="regime-banner sidelined">
           <div>
-            <div class="regime-banner-verdict">🚨 TECH LAGGING — STAY SIDELINED TODAY</div>
-            <div class="regime-banner-sub">Market context for current session strategy</div>
+            <div class="regime-banner-verdict">🚨 🚨 TECH LAGGING — STAY SIDELINED TODAY</div>
+            <div class="regime-banner-sub">QQQ momentum weaker than SPY despite SPY sitting above 200 SMA — classic distribution signal. VIX spiked to 27.29, confirming fear is entering the market.</div>
           </div>
-          <div class="strategy-pill">STRATEGY: CASH — NO NEW TRADES TODAY</div>
+          <div class="strategy-pill" style="font-family: var(--mono);">CASH — NO NEW TRADES TODAY</div>
         </div>
 
         
       <div class="regime-grid">
         <div class="metric-card">
-          <div class="metric-label">SPY Price</div>
-          <div class="metric-val">$666</div>
-          <div class="metric-sub">Dist 200SMA: <b>1.5%</b></div>
+          <div class="metric-label" style="text-transform: uppercase;">SPY PRICE</div>
+          <div class="metric-val" style="color:var(--red);">666.06</div>
+          <div class="metric-sub" style="margin-bottom:6px;">200 SMA: <b style="color:var(--text);">656.19</b></div>
+          <div class="metric-sub"><span class="dot dot-green"></span><span style="color:var(--green);">Above SMA (+1.5%)</span></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">QQQ Price</div>
-          <div class="metric-val">$597</div>
-          <div class="metric-sub">Relative: <b>Lagging</b></div>
+          <div class="metric-label" style="text-transform: uppercase;">QQQ PRICE</div>
+          <div class="metric-val" style="color:var(--red);">597.26</div>
+          <div class="metric-sub" style="margin-bottom:6px;">200 SMA: <b style="color:var(--text);">588.49</b></div>
+          <div class="metric-sub"><span class="dot dot-yellow"></span><span style="color:var(--yellow);">Lagging SPY momentum</span></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">VIX (Fear)</div>
-          <div class="metric-val">27.3</div>
-          <div class="metric-sub">Zone: <b>Elevated</b></div>
+          <div class="metric-label">VIX • FEAR GAUGE</div>
+          <div class="metric-val" style="color:var(--red);">27.29</div>
+          <div class="metric-sub">
+            <span style="color:var(--green);">▪ &lt;15 Calm</span> &nbsp;
+            <span style="color:var(--yellow);">▪ 15-28</span> &nbsp;
+            <span style="color:var(--red);">▪ &gt;28 ⚠</span>
+          </div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">ADX (Trend)</div>
-          <div class="metric-val">25.9</div>
-          <div class="metric-sub">Trend: <b>Strong</b></div>
+          <div class="metric-label">ADX • TREND (14D)</div>
+          <div class="metric-val" style="color:var(--green);">25.93</div>
+          <div class="metric-sub" style="margin-bottom:6px;"><span class="dot dot-green"></span><span style="color:var(--green);">Strong trend (&gt;25)</span></div>
+          <div class="metric-sub" style="color:var(--muted);">Bear move has conviction</div>
         </div>
       </div>
     
 
         <div class="breadth-card">
-          <div class="metric-label">Market Breadth (% of stocks above 50MA)</div>
+          <div class="breadth-row">
+            <div class="metric-label" style="margin:0; text-transform:uppercase;">BREADTH • $SPXA50R</div>
+            
+            <div style="font-size:12px; font-family:var(--mono); display:flex; gap:16px;">
+              <span style="color:var(--red);">▼ &lt;25% Oversold zone</span>
+              <span style="color:var(--yellow);">🟡 25-70% Neutral</span>
+              <span style="color:var(--green);">▲ &gt;70% Extended</span>
+            </div>
+            
+          </div>
+          <div style="font-size:32px; font-weight:800; color:var(--yellow); font-family:var(--mono); margin-bottom:12px; line-height:1;">
+            32.2% 
+            <span style="font-size:13px; font-weight:600; font-family:var(--mono); color:var(--muted); margin-left:12px; vertical-align:middle;">
+              Δ <span class="red">-7.2%</span> from prev session
+            </span>
+          </div>
           <div class="breadth-track">
             <div class="breadth-fill" style="width: 32.2%"></div>
+            <div class="breadth-marker" style="left: calc(32.2% - 8px);"></div>
           </div>
-          <div class="breadth-labels"><span>0% (OVERSOLD)</span><span>50% (NEUTRAL)</span><span>100% (OVERBOUGHT)</span></div>
+          <div class="breadth-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
         </div>
       </div>
 
@@ -175,7 +310,10 @@
             <tr>
               <th style="text-align: left;">Sector</th>
               <th>Daily</th>
-              <th>YTD</th>
+              <th>10D</th>
+              <th>20D</th>
+              <th>Vol</th>
+              <th>Opp</th>
               <th>RSI (14)</th>
               <th>Trend</th>
             </tr>
@@ -185,7 +323,10 @@
               <tr>
                 <td>Energy <span class="ticker-tag">XLE</span></td>
                 <td style="color: var(--green)">+0.93%</td>
-                <td style="color: var(--green)">+25.98%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">GOOD</span></td>
                 <td><span class="badge badge-blue">69.5</span></td>
                 <td>⚪</td>
               </tr>
@@ -193,7 +334,10 @@
               <tr>
                 <td>Utilities <span class="ticker-tag">XLU</span></td>
                 <td style="color: var(--green)">+0.71%</td>
-                <td style="color: var(--green)">+7.69%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">56.4</span></td>
                 <td>⚪</td>
               </tr>
@@ -201,7 +345,10 @@
               <tr>
                 <td>Materials <span class="ticker-tag">XLB</span></td>
                 <td style="color: var(--red)">-0.32%</td>
-                <td style="color: var(--green)">+7.72%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">36.9</span></td>
                 <td>⚪</td>
               </tr>
@@ -209,7 +356,10 @@
               <tr>
                 <td>Consumer Staples <span class="ticker-tag">XLP</span></td>
                 <td style="color: var(--red)">-0.40%</td>
-                <td style="color: var(--green)">+8.44%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">38.8</span></td>
                 <td>⚪</td>
               </tr>
@@ -217,7 +367,10 @@
               <tr>
                 <td>Real Estate <span class="ticker-tag">XLRE</span></td>
                 <td style="color: var(--red)">-0.64%</td>
-                <td style="color: var(--green)">+4.36%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">40.6</span></td>
                 <td>⚪</td>
               </tr>
@@ -225,7 +378,10 @@
               <tr>
                 <td>Communication Services <span class="ticker-tag">XLC</span></td>
                 <td style="color: var(--red)">-1.48%</td>
-                <td style="color: var(--red)">-1.39%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">41.2</span></td>
                 <td>⚪</td>
               </tr>
@@ -233,7 +389,10 @@
               <tr>
                 <td>Financials <span class="ticker-tag">XLF</span></td>
                 <td style="color: var(--red)">-1.63%</td>
-                <td style="color: var(--red)">-11.11%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-green">28.8</span></td>
                 <td>⚪</td>
               </tr>
@@ -241,7 +400,10 @@
               <tr>
                 <td>Health Care <span class="ticker-tag">XLV</span></td>
                 <td style="color: var(--red)">-1.76%</td>
-                <td style="color: var(--red)">-3.44%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">34.0</span></td>
                 <td>⚪</td>
               </tr>
@@ -249,7 +411,10 @@
               <tr>
                 <td>Technology <span class="ticker-tag">XLK</span></td>
                 <td style="color: var(--red)">-1.84%</td>
-                <td style="color: var(--red)">-4.48%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">43.8</span></td>
                 <td>⚪</td>
               </tr>
@@ -257,7 +422,10 @@
               <tr>
                 <td>Consumer Discretionary <span class="ticker-tag">XLY</span></td>
                 <td style="color: var(--red)">-2.30%</td>
-                <td style="color: var(--red)">-5.77%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">31.0</span></td>
                 <td>⚪</td>
               </tr>
@@ -265,7 +433,10 @@
               <tr>
                 <td>Industrials <span class="ticker-tag">XLI</span></td>
                 <td style="color: var(--red)">-2.51%</td>
-                <td style="color: var(--green)">+4.60%</td>
+                <td style="color: var(--muted)">-</td>
+                <td style="color: var(--muted)">-</td>
+                <td><span class="badge badge-muted">-</span></td>
+                <td><span class="blue">MODERATE</span></td>
                 <td><span class="badge badge-blue">35.5</span></td>
                 <td>⚪</td>
               </tr>
@@ -350,7 +521,7 @@
 
       
       <div class="section-wrap">
-        <div class="section-title"><span>🗓️</span> Recent Session History</div>
+        <div class="section-title" style="letter-spacing:1px;">RECENT SESSION HISTORY</div>
         <table class="history-table">
           <thead>
             <tr>
@@ -360,41 +531,42 @@
               <th>VIX</th>
               <th>ADX</th>
               <th>Breadth</th>
+              <th>Breadth Δ</th>
               <th>Verdict</th>
             </tr>
           </thead>
           <tbody>
             
               <tr class="">
-                <td>10 Mar</td>
+                <td>10 Mar </td>
                 <td>$677</td>
                 <td>$608</td>
                 <td>24.9</td>
                 <td>23.3</td>
                 <td>38%</td>
+                <td class="">-</td>
                 <td><span class="badge badge-muted">Insufficient Data</span></td>
               </tr>
-            
               <tr class="">
-                <td>11 Mar</td>
+                <td>11 Mar </td>
                 <td>$676</td>
                 <td>$608</td>
                 <td>24.2</td>
                 <td>24.3</td>
                 <td>39%</td>
+                <td class="green">+1.2%</td>
                 <td><span class="badge badge-muted">✅ BULLISH — LOOK FOR SETUPS TODAY</span></td>
               </tr>
-            
               <tr class="latest">
-                <td>12 Mar</td>
+                <td>12 Mar <span class="latest-marker">◀</span></td>
                 <td>$666</td>
                 <td>$597</td>
                 <td>27.3</td>
                 <td>25.9</td>
                 <td>32%</td>
+                <td class="red">-7.2%</td>
                 <td><span class="badge badge-muted">🚨 TECH LAGGING — STAY SIDELINED TODAY</span></td>
               </tr>
-            
           </tbody>
         </table>
       </div>
