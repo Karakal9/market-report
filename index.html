@@ -1,837 +1,688 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8">
-      <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-      <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-      <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-      <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap');
       :root {
-        --bg-deep:   #070d1a;
-        --bg-card:   #0d1626;
-        --bg-raised: #111f35;
-        --border:    #1e3050;
-        --text:      #e2eaf5;
-        --muted:     #4a6080;
-        --green:     #00d4a0;
-        --green-dim: #002e22;
-        --red:       #ff4d6d;
-        --red-dim:   #2d0010;
-        --yellow:    #ffd166;
-        --yellow-dim:#2d2000;
-        --orange:    #ff9f43;
-        --blue:      #4da6ff;
-        --mono: 'JetBrains Mono', monospace;
-        --sans: 'Syne', sans-serif;
+        --bg-deep:#070d1a; --bg-card:#0d1626; --bg-raised:#111f35;
+        --border:#1e3050; --text:#e2eaf5; --muted:#4a6080;
+        --green:#00d4a0; --green-dim:#002e22;
+        --red:#ff4d6d;     --red-dim:#2d0010;
+        --yellow:#ffd166; --yellow-dim:#2d2000;
+        --orange:#ff9f43; --blue:#4da6ff;
+        --mono:'JetBrains Mono',monospace; --sans:'Syne',sans-serif;
       }
-
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: var(--sans); background: var(--bg-deep); color: var(--text); padding: 28px 16px 80px; }
-      .page { max-width: 980px; margin: 0 auto; }
-
-      /* ── HEADER ── */
-      .report-header {
-        display: flex; justify-content: space-between; align-items: center;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 20px; margin-bottom: 36px;
-      }
-      .report-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
-      .report-meta { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
-
-      /* ── SECTION TITLES ── */
-      .section-title {
-        font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-        text-transform: uppercase; color: var(--muted);
-        margin-bottom: 14px; padding-bottom: 8px;
-        border-bottom: 1px solid var(--border);
-        display: flex; align-items: center; gap: 8px;
-      }
-      .section-wrap { margin-bottom: 40px; }
-
-      /* ── REGIME ALERT BANNER ── */
-      .regime-banner {
-        background: var(--red-dim);
-        border: 1px solid var(--red);
-        border-radius: 10px;
-        padding: 20px 24px;
-        margin-bottom: 28px;
-        display: flex; align-items: center; justify-content: space-between; gap: 20px;
-      }
-      .regime-banner.sidelined { background: var(--red-dim); border-color: var(--red); }
-      .regime-banner.bearish { background: #1a0a00; border-color: var(--orange); }
-      .regime-banner.choppy { background: var(--yellow-dim); border-color: var(--yellow); }
-      .regime-banner.bullish { background: var(--green-dim); border-color: var(--green); }
-      .regime-banner.unknown { background: var(--bg-card); border-color: var(--border); }
-      
-      .regime-banner-left { flex: 1; }
-      .regime-banner-emoji { font-size: 28px; margin-bottom: 4px; }
-      .regime-banner-verdict { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-      .regime-banner.sidelined .regime-banner-verdict { color: var(--red); }
-      .regime-banner.bearish .regime-banner-verdict { color: var(--orange); }
-      .regime-banner.choppy .regime-banner-verdict { color: var(--yellow); }
-      .regime-banner.bullish .regime-banner-verdict { color: var(--green); }
-      .regime-banner-sub { font-size: 13px; color: #c0a0a8; }
-      .regime-strategy-pill {
-        font-family: var(--mono); font-size: 12px; font-weight: 700;
-        background: var(--bg-card); color: var(--text);
-        border: 1px solid var(--border); border-radius: 999px;
-        padding: 8px 18px; white-space: nowrap;
-      }
-      .sidelined .regime-strategy-pill { background: #3d0015; color: var(--red); border-color: var(--red); }
-      .bearish .regime-strategy-pill { background: #2d1500; color: var(--orange); border-color: var(--orange); }
-      .choppy .regime-strategy-pill { background: var(--yellow-dim); color: var(--yellow); border-color: var(--yellow); }
-      .bullish .regime-strategy-pill { background: var(--green-dim); color: var(--green); border-color: var(--green); }
-      /* ── REGIME METRICS GRID ── */
-      .regime-grid {
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-        margin-bottom: 20px;
-      }
-      .metric-card {
-        background: var(--bg-card); border: 1px solid var(--border);
-        border-radius: 8px; padding: 14px 16px;
-      }
-      .metric-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-      .metric-val { font-family: var(--mono); font-size: 22px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
-      .metric-sub { font-size: 11px; color: var(--muted); line-height: 1.6; }
-      .metric-sub b { color: var(--text); }
-      .green { color: var(--green); }
-      .red   { color: var(--red); }
-      .yellow { color: var(--yellow); }
-      .orange { color: var(--orange); }
-
-      /* Breadth bar */
-      .breadth-card {
-        background: var(--bg-card); border: 1px solid var(--border);
-        border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;
-      }
-      .breadth-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-      .breadth-track {
-        height: 8px; border-radius: 4px; background: var(--border);
-        position: relative; overflow: visible; margin-bottom: 4px;
-      }
-      .breadth-fill {
-        height: 100%; border-radius: 4px;
-        background: linear-gradient(90deg, var(--red) 0%, var(--yellow) 50%, var(--green) 100%);
-      }
-      .breadth-marker {
-        position: absolute; top: -4px;
-        width: 16px; height: 16px; border-radius: 50%;
-        background: var(--yellow); border: 2px solid var(--bg-deep);
-      }
-      .breadth-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); font-family: var(--mono); margin-top: 6px; }
-
-      /* Regime history table */
-      .history-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-      .history-table th {
-        font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
-        text-transform: uppercase; color: var(--muted);
-        padding: 8px 12px; text-align: center;
-        border-bottom: 1px solid var(--border);
-      }
-      .history-table td {
-        font-family: var(--mono); font-size: 12px;
-        padding: 10px 12px; text-align: center;
-        border-bottom: 1px solid var(--border);
-      }
-      .history-table tr:last-child td { background: #0d1a2d; }
-      .latest-marker { font-size: 10px; color: var(--yellow); margin-left: 4px; }
-      .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 10px; font-weight: 700; }
-      .badge-green { background: var(--green-dim); color: var(--green); border: 1px solid #00d4a033; }
-      .badge-red { background: var(--red-dim); color: var(--red); border: 1px solid #ff4d6d33; }
-      .badge-yellow { background: var(--yellow-dim); color: var(--yellow); border: 1px solid #ffd16633; }
-      .badge-blue { background: #001a3d; color: var(--blue); border: 1px solid #4da6ff33; }
-      .badge-muted { background: var(--bg-card); color: var(--muted); border: 1px solid var(--border); }
-
-      /* Momentum Table */
-      .momentum-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
-      .momentum-table th {
-        font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
-        text-transform: uppercase; color: var(--muted);
-        padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border);
-      }
-      .momentum-table td { padding: 11px 12px; text-align: center; border-bottom: 1px solid var(--border); }
-      .momentum-table td:first-child { text-align: left; font-weight: 600; }
-      .ticker-tag { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
-      .energy-row td { background: rgba(255,159,67,0.05); }
-
-      /* Setup Cards */
-      .setup-card {
-        background: var(--bg-card); border: 1px solid var(--border);
-        border-radius: 10px; padding: 20px 22px; margin-bottom: 12px; position: relative;
-      }
-      .setup-card.active { border-color: var(--green); }
-      .setup-card.warn { border-color: #ffd16688; }
-      .setup-card.suppressed { opacity: 0.35; }
-      
-      .setup-overlay {
-        position: absolute; inset: 0; border-radius: 10px;
-        background: rgba(7,13,26,0.80);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 12px; font-weight: 700; color: var(--red);
-        letter-spacing: 0.1em; font-family: var(--mono);
-      }
-
-      .setup-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-      .setup-type { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-      .setup-sector { font-size: 12px; color: var(--muted); }
-      .setup-action { font-size: 13px; color: var(--text); padding-top: 4px; }
-      
-      .setup-data {
-        background: var(--bg-deep); border-radius: 6px; padding: 12px 14px;
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;
-      }
-      .setup-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
-      .setup-stat-val { font-family: var(--mono); font-size: 14px; font-weight: 600; }
-      
-      .setup-body { font-size: 13px; color: #8090a8; line-height: 1.6; }
-
-      /* Avoid Cards */
-      .avoid-card {
-        background: var(--bg-card);
-        border-left: 4px solid var(--red);
-        border-radius: 0 8px 8px 0;
-        padding: 14px 18px; margin-bottom: 10px;
-      }
-      .avoid-name { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
-      .avoid-reason { font-size: 13px; color: #8090a8; }
-      
-      /* Status Dots */
-      .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-      .dot-green { background: var(--green); box-shadow: 0 0 8px var(--green-dim); }
-      .dot-red { background: var(--red); box-shadow: 0 0 8px var(--red-dim); }
-      .dot-yellow { background: var(--yellow); box-shadow: 0 0 8px var(--yellow-dim); }
-      .dot-blue { background: var(--blue); }
-      .dot-gray { background: var(--muted); }
-
-      .footer { text-align: center; padding-top: 40px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
-      a { color: var(--blue); text-decoration: none; }
+      *{box-sizing:border-box;margin:0;padding:0;}
+      body{font-family:var(--sans);background:var(--bg-deep);color:var(--text);padding:28px 16px 80px;}
+      .page{max-width:980px;margin:0 auto;}
+      .report-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:36px;}
+      .report-title{font-size:26px;font-weight:800;letter-spacing:-0.02em;}
+      .report-meta{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;line-height:1.8;}
+      .section-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+      .section-wrap{margin-bottom:40px;}
+      .regime-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+      .metric-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+      .metric-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+      .metric-val{font-family:var(--mono);font-size:22px;font-weight:700;line-height:1;margin-bottom:4px;}
+      .metric-sub{font-size:11px;color:var(--muted);line-height:1.6;}
+      .metric-sub b{color:var(--text);}
+      .breadth-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:20px;}
+      .breadth-track{height:8px;border-radius:4px;background:var(--border);position:relative;overflow:hidden;margin-bottom:4px;}
+      .breadth-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--red) 0%,var(--yellow) 50%,var(--green) 100%);}
+      .breadth-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+      .history-table{width:100%;border-collapse:collapse;font-size:13px;}
+      .history-table th{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:8px 12px;text-align:center;border-bottom:1px solid var(--border);}
+      .history-table td{font-family:var(--mono);font-size:12px;padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);}
+      .history-table tr.latest td{background:#0d1a2d;}
+      .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--mono);font-size:10px;font-weight:700;}
+      .badge-green{background:var(--green-dim);color:var(--green);border:1px solid #00d4a033;}
+      .badge-red{background:var(--red-dim);color:var(--red);border:1px solid #ff4d6d33;}
+      .badge-yellow{background:var(--yellow-dim);color:var(--yellow);border:1px solid #ffd16633;}
+      .badge-blue{background:#001a3d;color:var(--blue);border:1px solid #4da6ff33;}
+      .badge-muted{background:var(--bg-card);color:var(--muted);border:1px solid var(--border);}
+      .data-table{width:100%;border-collapse:collapse;font-size:13px;}
+      .data-table th{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;color:var(--muted);padding:8px 12px;text-align:right;border-bottom:1px solid var(--border);}
+      .data-table td{font-family:var(--mono);font-size:12px;padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);color:var(--text);}
+      .data-table th:first-child,.data-table td:first-child{text-align:left;}
+      .ticker-tag{font-family:var(--mono);font-size:10px;color:var(--muted);display:block;margin-top:2px;}
+      .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+      .dot-green{background:var(--green);box-shadow:0 0 5px var(--green);}
+      .dot-red{background:var(--red);box-shadow:0 0 5px var(--red);}
+      .dot-yellow{background:var(--yellow);box-shadow:0 0 5px var(--yellow);}
+      .footer{text-align:center;padding-top:40px;font-size:12px;color:var(--muted);font-family:var(--mono);}
+      a{color:var(--blue);text-decoration:none;}
     </style>
-  </head><body>
-    <div class="page">
-      <div class="section-wrap" style="margin-top:20px;">
-        <div class="section-title" style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px; font-size:12px; letter-spacing:1px;"><span>🧭</span> MARKET REGIME</div>
-        
-        <div class="regime-banner sidelined">
-          <div>
-            <div class="regime-banner-verdict">🚨 🚨 TECH LAGGING — STAY SIDELINED TODAY</div>
-            <div class="regime-banner-sub">QQQ momentum weaker than SPY despite SPY sitting above 200 SMA — classic distribution signal. VIX spiked to 27.29, confirming fear is entering the market.</div>
-          </div>
-          <div class="strategy-pill" style="font-family: var(--mono);">CASH — NO NEW TRADES TODAY</div>
-        </div>
+</head>
+<body><div class="page">
 
-        
-      <div class="regime-grid">
-        <div class="metric-card">
-          <div class="metric-label" style="text-transform: uppercase;">SPY PRICE</div>
-          <div class="metric-val" style="color:var(--red);">662.29</div>
-          <div class="metric-sub" style="margin-bottom:6px;">200 SMA: <b style="color:var(--text);">656.52</b></div>
-          <div class="metric-sub"><span class="dot dot-green"></span><span style="color:var(--green);">Above SMA (+0.9%)</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label" style="text-transform: uppercase;">QQQ PRICE</div>
-          <div class="metric-val" style="color:var(--red);">593.72</div>
-          <div class="metric-sub" style="margin-bottom:6px;">200 SMA: <b style="color:var(--text);">588.84</b></div>
-          <div class="metric-sub"><span class="dot dot-yellow"></span><span style="color:var(--yellow);">Lagging SPY momentum</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">VIX • FEAR GAUGE</div>
-          <div class="metric-val" style="color:var(--red);">27.19</div>
-          <div class="metric-sub">
-            <span style="color:var(--green);">▪ &lt;15 Calm</span> &nbsp;
-            <span style="color:var(--yellow);">▪ 15-28</span> &nbsp;
-            <span style="color:var(--red);">▪ &gt;28 ⚠</span>
-          </div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">ADX • TREND (14D)</div>
-          <div class="metric-val" style="color:var(--green);">27.71</div>
-          <div class="metric-sub" style="margin-bottom:6px;"><span class="dot dot-green"></span><span style="color:var(--green);">Strong trend (&gt;25)</span></div>
-          <div class="metric-sub" style="color:var(--muted);">Bear move has conviction</div>
-        </div>
+<!-- ══ HEADER ══ -->
+<!-- FIX 1: All colors use THEME hex — no CSS var() strings in inline styles -->
+<div class="report-header">
+  <div>
+    <div style="font-size:11px;font-family:monospace;color:#4a6080;margin-bottom:6px;letter-spacing:.1em;">SECTOR MOMENTUM ANALYSIS</div>
+    <div class="report-title" style="color:#e2eaf5;">Daily Market Report</div>
+  </div>
+  <div class="report-meta">
+    <div style="color:#4a6080;">Session: <b style="color:#e2eaf5;">13 Mar 2026</b></div>
+    <div style="color:#4a6080;">Generated pre-market</div>
+    <div style="margin-top:4px;color:#4a6080;">
+      <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff4d6d;box-shadow:0 0 5px #ff4d6d;margin-right:5px;vertical-align:middle;"></span>
+      Regime: <span style="color:#ff4d6d;font-weight:700;">SIDELINED</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REGIME ══ -->
+<div class="section-wrap">
+  <div class="section-title">🧭 Market Regime</div>
+
+  <div style="background:#2d0010;border:1px solid #ff4d6d;border-radius:10px;padding:20px 24px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
+    <div>
+      <div style="font-size:18px;font-weight:800;color:#ff4d6d;margin-bottom:4px;">🚨 TECH LAGGING — STAY SIDELINED TODAY</div>
+      <div style="font-size:13px;color:#8090a8;">Market context for current session strategy</div>
+    </div>
+    <div style="font-family:monospace;font-size:12px;font-weight:700;background:#3d0015;color:#ff4d6d;border:1px solid #ff4d6d;border-radius:999px;padding:8px 18px;white-space:nowrap;">
+      STRATEGY: CASH — NO NEW TRADES TODAY
+    </div>
+  </div>
+
+  
+    <div class="regime-grid">
+      <div class="metric-card">
+        <div class="metric-label">SPY Price</div>
+        <div class="metric-val" style="color:#e2eaf5;">$662.29</div>
+        <div class="metric-sub">200 SMA: <b>$656.52</b></div>
+        <div class="metric-sub"><span class="dot dot-green"></span><span style="color:#00d4a0;">Above SMA (0.9%)</span></div>
       </div>
-    
+      <div class="metric-card">
+        <div class="metric-label">QQQ Price</div>
+        <div class="metric-val" style="color:#e2eaf5;">$593.72</div>
+        <div class="metric-sub">200 SMA: <b>$588.84</b></div>
+        <div class="metric-sub"><span class="dot dot-yellow"></span><span style="color:#ffd166;">Lagging SPY</span></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">VIX · Fear Gauge</div>
+        <div class="metric-val" style="color:#ff4d6d;">27.19</div>
+        <div class="metric-sub" style="font-size:10px;"><span style="color:#00d4a0;">▪ &lt;15 Calm</span> &nbsp;<span style="color:#ffd166;">▪ 15–28</span> &nbsp;<span style="color:#ff4d6d;">▪ &gt;28 ⚠</span></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">ADX · Trend (14D)</div>
+        <div class="metric-val" style="color:#00d4a0;">27.71</div>
+        <div class="metric-sub"><span class="dot dot-green"></span><span style="color:#00d4a0;">Strong (&gt;25)</span></div>
+        <div class="metric-sub">Strong trend</div>
+      </div>
+    </div>
 
-        <div class="breadth-card">
-          <div class="breadth-row">
-            <div class="metric-label" style="margin:0; text-transform:uppercase;">BREADTH • $SPXA50R</div>
+  <div class="breadth-card">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+      <div class="metric-label">Breadth · $SPXA50R</div>
+      <div style="font-size:11px;color:#4a6080;">🟡 Below Average</div>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:12px;">
+      <span style="font-family:monospace;font-size:28px;font-weight:800;color:#ffd166;">32.4%</span>
+      <span style="font-family:monospace;font-size:13px;color:#4a6080;">Δ <span style="color:#00d4a0;">+0.2%</span> from prev session</span>
+    </div>
+    <div class="breadth-track">
+      <div class="breadth-fill" style="width:32.4%;"></div>
+    </div>
+    <div class="breadth-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+  </div>
+
+  
+      <div style="background:#0d1626;border:1px solid #1e3050;border-radius:8px;overflow:hidden;margin-top:20px;">
+        <div style="padding:12px 16px;border-bottom:1px solid #1e3050;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a6080;">Recent Session History</div>
+        <table class="history-table">
+          <thead><tr><th>Date</th><th>SPY</th><th>QQQ</th><th>VIX</th><th>ADX</th><th>Breadth %</th><th>Breadth Δ</th><th>Verdict</th></tr></thead>
+          <tbody>
             
-            <div style="font-size:12px; font-family:var(--mono); display:flex; gap:16px;">
-              <span style="color:var(--red);">▼ &lt;25% Oversold zone</span>
-              <span style="color:var(--yellow);">🟡 25-70% Neutral</span>
-              <span style="color:var(--green);">▲ &gt;70% Extended</span>
-            </div>
-            
-          </div>
-          <div style="font-size:32px; font-weight:800; color:var(--yellow); font-family:var(--mono); margin-bottom:12px; line-height:1;">
-            32.4% 
-            <span style="font-size:13px; font-weight:600; font-family:var(--mono); color:var(--muted); margin-left:12px; vertical-align:middle;">
-              Δ <span class="green">+20.0%</span> from prev session
-            </span>
-          </div>
-          <div class="breadth-track">
-            <div class="breadth-fill" style="width: 32.4%"></div>
-            <div class="breadth-marker" style="left: calc(32.4% - 8px);"></div>
-          </div>
-          <div class="breadth-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-        </div>
+                <tr class="">
+                  <td style="color:#4a6080;">10 Mar</td>
+                  <td>$677</td>
+                  <td>$608</td>
+                  <td style="color:#ffd166;">24.9</td>
+                  <td style="color:#e2eaf5;">23.3</td>
+                  <td style="color:#ffd166;">38.2%</td>
+                  <td style="color:#e2eaf5;">—</td>
+                  <td><span class="badge badge-muted">Insufficient Data</span></td>
+                </tr>
+                <tr class="">
+                  <td style="color:#4a6080;">11 Mar</td>
+                  <td>$676</td>
+                  <td>$608</td>
+                  <td style="color:#ffd166;">24.2</td>
+                  <td style="color:#e2eaf5;">24.3</td>
+                  <td style="color:#ffd166;">39.4%</td>
+                  <td style="color:#00d4a0;">+1.2%</td>
+                  <td><span class="badge badge-green">✅ BULLISH</span></td>
+                </tr>
+                <tr class="">
+                  <td style="color:#4a6080;">12 Mar</td>
+                  <td>$666</td>
+                  <td>$597</td>
+                  <td style="color:#ffd166;">27.3</td>
+                  <td style="color:#00d4a0;">25.9</td>
+                  <td style="color:#ffd166;">32.2%</td>
+                  <td style="color:#ff4d6d;">-7.2%</td>
+                  <td><span class="badge badge-red">🚨 TECH LAGGING</span></td>
+                </tr>
+                <tr class="latest">
+                  <td style="color:#ffd166;">13 Mar <span style="font-size:10px;color:#ffd166;">◀</span></td>
+                  <td>$662</td>
+                  <td>$594</td>
+                  <td style="color:#ffd166;">27.2</td>
+                  <td style="color:#00d4a0;">27.7</td>
+                  <td style="color:#ffd166;">32.4%</td>
+                  <td style="color:#00d4a0;">+0.2%</td>
+                  <td><span class="badge badge-red">🚨 TECH LAGGING</span></td>
+                </tr>
+          </tbody>
+        </table>
       </div>
+</div>
 
-      <div class="section-wrap">
-        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>🔥</span> SECTOR PERFORMANCE HEATMAP</div>
-        
-        
-        <div style="background: var(--red-dim); border: 1px solid var(--red); border-radius: 8px; padding: 16px; margin-bottom: 20px; font-size: 13px; line-height: 1.5; color:var(--text);">
-          <div style="display:flex; gap:12px; align-items:flex-start;">
-            <span style="font-size:20px; line-height:1;">🚨</span>
-            <div>
-              <b style="color:var(--red);">Regime Filter Active:</b> Market is in 🚨 TECH LAGGING — STAY SIDELINED TODAY state. All sectors shown for reference only. No new long positions are recommended today. The single exception: <b style="color:var(--green);">Energy (XLE)</b> shows structural strength but confirm with tight risk management only.
-            </div>
-          </div>
-        </div>
-        
-
-        
-    <div style="display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:10px; font-size:11px; color:#4a6080;">
-      <span>Day return:</span>
-      <div style="display:flex; height:10px; border-radius:3px; overflow:hidden; width:180px;">
-        <div style="flex:1; background:#991b1b;"></div>
-        <div style="flex:1; background:#dc2626;"></div>
-        <div style="flex:1; background:#f87171;"></div>
-        <div style="flex:1; background:#475569;"></div>
-        <div style="flex:1; background:#34d399;"></div>
-        <div style="flex:1; background:#10b981;"></div>
-        <div style="flex:1; background:#059669;"></div>
-      </div>
-      <span style="color:#f87171;">−3%</span>
-      <span>0</span>
-      <span style="color:#00d4a0;">+3%</span>
+<!-- ══ HEATMAP ══ -->
+<div class="section-wrap">
+  <div class="section-title">🔥 Sector Performance Heatmap</div>
+  
+    <div style="background:#2d0010;border:1px solid #ff4d6d55;border-radius:8px;padding:16px 20px;margin-bottom:16px;font-size:13px;color:#c0a0a8;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:20px;flex-shrink:0;">🚨</span>
+      <div><strong style="color:#ff4d6d;">Regime Filter Active:</strong> Sector data shown for reference only. No new long positions recommended today based on current market regime.</div>
     </div>
   
-    <div style="background:#2d0010; border:1px solid #ff4d6d55; border-radius:8px; padding:16px 20px; margin-bottom:16px; font-size:13px; color:#c0a0a8; display:flex; gap:12px; align-items:flex-start;">
-      <span style="font-size:20px; flex-shrink:0;">🚨</span>
-      <div><strong style="color:#ff4d6d;">Regime Filter Active:</strong> Sector data shown for reference only. No new long positions recommended today based on current market regime.</div>
-    </div><div id="treemap-div" style="width:100%; height:480px; background:var(--bg-card); border-radius:12px; border:1px solid var(--border); opacity:0.6;"></div>
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:10px;font-size:11px;color:#4a6080;font-family:monospace;">
+      <span>Day return:</span>
+      <div style="display:flex;height:10px;border-radius:3px;overflow:hidden;width:200px;">
+        <div style="flex:1;background:#991b1b;"></div><div style="flex:1;background:#dc2626;"></div>
+        <div style="flex:1;background:#f87171;"></div><div style="flex:1;background:#475569;"></div>
+        <div style="flex:1;background:#34d399;"></div><div style="flex:1;background:#10b981;"></div>
+        <div style="flex:1;background:#059669;"></div>
       </div>
-
-      
-      <div class="section-wrap">
-        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>📈</span> 30-DAY RELATIVE PERFORMANCE</div>
-        <div id="trendChart" style="width: 100%; height: 350px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);"></div>
+      <div style="display:flex;justify-content:space-between;width:200px;font-size:10px;margin-top:-12px;padding:0 2px;">
+        <span style="color:#f87171;">-3%</span><span style="color:#f87171;">-2</span><span style="color:#f87171;">-1</span>
+        <span>0</span>
+        <span style="color:#34d399;">+1</span><span style="color:#10b981;">+2</span><span style="color:#00d4a0;">+3%</span>
       </div>
-      
+    </div>
+  <div id="treemap-div" style="width:100%;height:480px;background:#0d1626;border-radius:12px;border:1px solid #1e3050;"></div>
+</div>
 
-      <div class="section-wrap">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
-          <div class="section-title" style="letter-spacing:1px; font-size:12px; border:none; padding:0; margin:0;"><span>📊</span> MOMENTUM ANALYSIS</div>
-          <div style="font-size:10px; font-family:var(--mono); color:var(--red); font-weight:700; letter-spacing:0.05em; opacity:0.8;"><span style="display:inline-block; width:10px; height:10px; background:var(--bg-deep); border:1px solid var(--muted); vertical-align:middle; margin-right:6px; border-radius:2px;"></span> DIMMED = SUPPRESSED BY REGIME FILTER</div>
-        </div>
-        <table class="momentum-table">
-          <thead>
-            <tr>
-              <th style="text-align: left;">Sector</th>
-              <th>Last 10D</th>
-              <th>Last 20D</th>
-              <th>Momentum</th>
-              <th>Volume</th>
-              <th>Opp</th>
-              <th>Rev</th>
-              <th>RSI</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Technology</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLK</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">41.97</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Health Care</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLV</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">33.30</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Financials</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLF</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">29.31</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Consumer Discretionary</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLY</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">29.60</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Communication Services</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLC</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">37.84</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Industrials</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLI</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">34.58</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Consumer Staples</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLP</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">41.99</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Energy</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLE</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">LIMITED</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">70.21</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Utilities</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLU</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">60.52</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Real Estate</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLRE</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">42.53</td>
-              </tr>
-            
-              <tr style="opacity: 0.35;">
-                <td style="border-left: 2px solid transparent;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:14px; color:var(--muted);">Materials</span>
-                    
-                  </div>
-                  <span class="ticker-tag">XLB</span>
-                </td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td style="color: var(--muted); font-family:var(--mono); font-weight:600;">-</td>
-                <td><span class="badge badge-muted">NEUTRAL</span></td>
-                <td><span class="badge badge-green">HIGH</span></td>
-                <td><span class="badge badge-yellow">MODERATE</span></td>
-                <td><span class="badge badge-muted">NONE</span></td>
-                <td style="color:var(--yellow); font-family:var(--mono); font-weight:600;">33.83</td>
-              </tr>
-            
-          </tbody>
-        </table>
-      </div>
+<!-- ══ PLOTLY CHART (web only) ══ -->
 
-      <div class="section-wrap">
-        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>🔴</span> SECTORS TO AVOID</div>
-        
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Technology <span class="badge badge-red">DISTRIBUTION</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
-        </div>
-      
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Health Care <span class="badge badge-red">DISTRIBUTION</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
-        </div>
-      
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Financials <span class="badge badge-red">DISTRIBUTION</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
-        </div>
-      
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Consumer Discretionary <span class="badge badge-red">DISTRIBUTION</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
-        </div>
-      
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Industrials <span class="badge badge-red">DISTRIBUTION</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
-        </div>
-      
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Energy <span class="badge badge-yellow">OVERBOUGHT</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">RSI Overbought (70.2) and showing signs of momentum exhaustion. Expected reversal near term.</div>
-        </div>
-      
-        <div class="avoid-card" style="border-left-color: var(--red);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div class="avoid-name" style="color: var(--red); display:flex; align-items:center; gap:8px;">Materials <span class="badge badge-red">DISTRIBUTION</span></div>
-              <div style="font-family:var(--mono); font-size:14px; font-weight:700; color:var(--red);">- <span style="font-size:10px; opacity:0.6; font-weight:400; color:var(--text);">(10D)</span></div>
-          </div>
-          <div class="avoid-reason">Heavy institutional selling observed. Price firmly below declining 20MA and 50MA. Expected further downside.</div>
-        </div>
-      
-      </div>
+<div class="section-wrap">
+  <div class="section-title">📈 30-Day Relative Performance</div>
+  <div id="relPerfChart" style="background:#0d1626;border:1px solid #1e3050;border-radius:8px;overflow:hidden;"></div>
+</div>
 
-      <div class="section-wrap">
-        <div class="section-title" style="letter-spacing:1px; font-size:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;"><span>🎯</span> TOP-DOWN SCAN ENVIRONMENTS</div>
-        
-        
-        <div style="background: var(--red-dim); border: 1px solid var(--red); border-radius: 8px; padding: 16px; margin-bottom: 20px; font-size: 13px; line-height: 1.5; color:var(--text);">
-          <div style="display:flex; gap:12px; align-items:flex-start;">
-            <span style="font-size:20px; line-height:1;">🚫</span>
-            <div>
-              <b style="color:var(--red);">All breakout and momentum setups are suppressed.</b> Regime verdict is 🚨 TECH LAGGING — STAY SIDELINED TODAY. Breakouts require a confirmed bullish regime — they are filtered out today. Only Mean Reversion setups are shown where applicable.
+<!-- ══ MOMENTUM TABLE ══ -->
+<div class="section-wrap">
+  <div class="section-title">📊 Momentum Analysis</div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="text-align:left;">Sector</th>
+        <th>Last 10D</th><th>Last 20D</th>
+        <th style="text-align:center;">Momentum</th>
+        <th style="text-align:center;">Volume</th>
+        <th style="text-align:center;">Opp</th>
+        <th>RSI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Energy</div>
+          <span class="ticker-tag">XLE</span>
+        </td>
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
+          +1.16%
+        </td>
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
+          +7.35%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#001a3d;color:#4da6ff;border:1px solid #4da6ff33;">POSITIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">LIMITED</span></td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">70.21</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Utilities</div>
+          <span class="ticker-tag">XLU</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -0.87%
+        </td>
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
+          +1.25%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NEUTRAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">60.52</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Technology</div>
+          <span class="ticker-tag">XLK</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -1.96%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -1.92%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NEUTRAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">41.97</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Communication Services</div>
+          <span class="ticker-tag">XLC</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -2.90%
+        </td>
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
+          +0.04%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NEUTRAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">HIGH</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">37.84</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Real Estate</div>
+          <span class="ticker-tag">XLRE</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -3.80%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -3.85%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">42.53</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Consumer Discretionary</div>
+          <span class="ticker-tag">XLY</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -3.95%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -4.46%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">29.60</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Consumer Staples</div>
+          <span class="ticker-tag">XLP</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -4.48%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -3.92%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">41.99</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Financials</div>
+          <span class="ticker-tag">XLF</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -4.70%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -6.34%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">29.31</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Health Care</div>
+          <span class="ticker-tag">XLV</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -5.51%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -4.82%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">33.30</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Materials</div>
+          <span class="ticker-tag">XLB</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -7.62%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -6.66%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">33.83</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Industrials</div>
+          <span class="ticker-tag">XLI</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -7.97%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -5.96%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">34.58</td>
+      </tr></tbody>
+  </table>
+</div>
+
+<!-- ══ SETUPS + AVOID ══ -->
+<div style="display:grid;grid-template-columns:1.5fr 1fr;gap:32px;margin-bottom:40px;">
+  <div>
+    <div class="section-title">🎯 Top-Down Scan Environments</div>
+    
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #4a6080;padding:20px;border-radius:8px;margin-bottom:12px;opacity:.5;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#0d1626;border:1px solid #1e3050;padding:8px 16px;border-radius:6px;font-size:11px;font-weight:700;color:#ff4d6d;z-index:10;font-family:monospace;">🚫 SUPPRESSED BY REGIME</div>
+          <div style="opacity:.4;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;">🟢 50 MA Pullbacks <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">SUPPRESSED</span></div>
+                <div style="font-size:13px;color:#4a6080;">Consumer Staples / Moderate Uptrend</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">-5.3%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;">Sector is in a long-term uptrend but is currently resting. Price is testing the 50 SMA and RSI has cooled off.</div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">-5.3%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#ffd166;">42.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">+0.3%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">SUPPRESSED</div></div>
+            </div>
+            <div style="background:#070d1a;padding:12px;border-radius:6px;font-size:13px;color:#e2eaf5;border:1px solid #1e3050;">
+              <strong style="color:#e2eaf5;margin-right:8px;">⚡ ACTION</strong>Scan this sector for stocks successfully testing their 50-day moving averages on low volume. Buy the bounce.
             </div>
           </div>
         </div>
-        
-
-        
-        <div class="setup-card" style="border-left-color: var(--muted); opacity: 0.5; position: relative; overflow: hidden;">
-          <div style="position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg-card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 700; color:var(--red); z-index:10; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family:var(--mono);">🚫 SUPPRESSED BY REGIME</div>
-          <div style="opacity: 0.4;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
-                  <div>
-                      <div style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; display:flex; align-items:center; gap:8px;">🟢 50 MA Pullbacks <span class="badge badge-muted">SUPPRESSED</span></div>
-                      <div style="font-size: 13px; color: var(--muted);">Consumer Staples / Moderate Uptrend</div>
-                  </div>
-                  <div style="text-align:right;">
-                      <div style="font-family: var(--mono); font-size: 18px; font-weight: 700; color:var(--red);">-5.3%</div>
-                      <div style="font-size: 10px; color: var(--muted); text-transform:uppercase; letter-spacing:0.05em;">20D Mom</div>
-                  </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #4a6080;padding:20px;border-radius:8px;margin-bottom:12px;opacity:.5;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#0d1626;border:1px solid #1e3050;padding:8px 16px;border-radius:6px;font-size:11px;font-weight:700;color:#ff4d6d;z-index:10;font-family:monospace;">🚫 SUPPRESSED BY REGIME</div>
+          <div style="opacity:.4;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;">🔵 Qullamaggie Breakouts <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">SUPPRESSED</span></div>
+                <div style="font-size:13px;color:#4a6080;">Energy / Strong Uptrend</div>
               </div>
-              <div style="font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 16px;">
-                  Sector is in a long-term uptrend but is currently resting. Price is testing the 50 SMA and RSI has cooled off.
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#00d4a0;">+6.2%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
               </div>
-              <div style="display:flex; gap:24px; border-top: 1px solid var(--border); padding-top:12px; margin-bottom: 16px;">
-                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Dist to 20MA</div><div style="font-family:var(--mono); font-size:14px; color:var(--green);">+0.3%</div></div>
-                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Trend</div><div style="font-family:var(--mono); font-size:14px; color:var(--text);">NEUTRAL</div></div>
-              </div>
-              <div style="background: var(--bg-deep); padding: 12px; border-radius: 6px; font-size: 13px; color:var(--text); border:1px solid var(--border);">
-                  <strong style="color:var(--text); margin-right:8px;">⚡ ACTION</strong> Scan this sector for stocks successfully testing their 50-day moving averages on low volume. Buy the bounce.
-              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;">Sector is experiencing explosive momentum but is not yet exhausted. Institutional money is actively supporting the trend.</div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">+6.2%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#ffd166;">70.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">+11.7%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">SUPPRESSED</div></div>
+            </div>
+            <div style="background:#070d1a;padding:12px;border-radius:6px;font-size:13px;color:#e2eaf5;border:1px solid #1e3050;">
+              <strong style="color:#e2eaf5;margin-right:8px;">⚡ ACTION</strong>Open your stock screener and filter for stocks in this sector with high Relative Strength forming tight flags or episodic pivots. Buy the breakout.
+            </div>
           </div>
         </div>
-      
-        <div class="setup-card" style="border-left-color: var(--muted); opacity: 0.5; position: relative; overflow: hidden;">
-          <div style="position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg-card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 700; color:var(--red); z-index:10; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family:var(--mono);">🚫 SUPPRESSED BY REGIME</div>
-          <div style="opacity: 0.4;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
-                  <div>
-                      <div style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; display:flex; align-items:center; gap:8px;">🔵 Qullamaggie Breakouts <span class="badge badge-muted">SUPPRESSED</span></div>
-                      <div style="font-size: 13px; color: var(--muted);">Energy / Strong Uptrend</div>
-                  </div>
-                  <div style="text-align:right;">
-                      <div style="font-family: var(--mono); font-size: 18px; font-weight: 700; color:var(--green);">+6.2%</div>
-                      <div style="font-size: 10px; color: var(--muted); text-transform:uppercase; letter-spacing:0.05em;">20D Mom</div>
-                  </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #4a6080;padding:20px;border-radius:8px;margin-bottom:12px;opacity:.5;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#0d1626;border:1px solid #1e3050;padding:8px 16px;border-radius:6px;font-size:11px;font-weight:700;color:#ff4d6d;z-index:10;font-family:monospace;">🚫 SUPPRESSED BY REGIME</div>
+          <div style="opacity:.4;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;">🟢 50 MA Pullbacks <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">SUPPRESSED</span></div>
+                <div style="font-size:13px;color:#4a6080;">Real Estate / Moderate Uptrend</div>
               </div>
-              <div style="font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 16px;">
-                  Sector is experiencing explosive momentum but is not yet exhausted. Institutional money is actively supporting the trend.
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">-2.9%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
               </div>
-              <div style="display:flex; gap:24px; border-top: 1px solid var(--border); padding-top:12px; margin-bottom: 16px;">
-                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Dist to 20MA</div><div style="font-family:var(--mono); font-size:14px; color:var(--green);">+11.7%</div></div>
-                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Trend</div><div style="font-family:var(--mono); font-size:14px; color:var(--text);">NEUTRAL</div></div>
-              </div>
-              <div style="background: var(--bg-deep); padding: 12px; border-radius: 6px; font-size: 13px; color:var(--text); border:1px solid var(--border);">
-                  <strong style="color:var(--text); margin-right:8px;">⚡ ACTION</strong> Open your stock screener and filter for stocks in this sector with high Relative Strength forming tight flags or episodic pivots. Buy the breakout.
-              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;">Sector is in a long-term uptrend but is currently resting. Price is testing the 50 SMA and RSI has cooled off.</div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">-2.9%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#ffd166;">43.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">+0.5%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">SUPPRESSED</div></div>
+            </div>
+            <div style="background:#070d1a;padding:12px;border-radius:6px;font-size:13px;color:#e2eaf5;border:1px solid #1e3050;">
+              <strong style="color:#e2eaf5;margin-right:8px;">⚡ ACTION</strong>Scan this sector for stocks successfully testing their 50-day moving averages on low volume. Buy the bounce.
+            </div>
           </div>
         </div>
-      
-        <div class="setup-card" style="border-left-color: var(--muted); opacity: 0.5; position: relative; overflow: hidden;">
-          <div style="position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg-card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 700; color:var(--red); z-index:10; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family:var(--mono);">🚫 SUPPRESSED BY REGIME</div>
-          <div style="opacity: 0.4;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
-                  <div>
-                      <div style="font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; display:flex; align-items:center; gap:8px;">🟢 50 MA Pullbacks <span class="badge badge-muted">SUPPRESSED</span></div>
-                      <div style="font-size: 13px; color: var(--muted);">Real Estate / Moderate Uptrend</div>
-                  </div>
-                  <div style="text-align:right;">
-                      <div style="font-family: var(--mono); font-size: 18px; font-weight: 700; color:var(--red);">-2.9%</div>
-                      <div style="font-size: 10px; color: var(--muted); text-transform:uppercase; letter-spacing:0.05em;">20D Mom</div>
-                  </div>
-              </div>
-              <div style="font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 16px;">
-                  Sector is in a long-term uptrend but is currently resting. Price is testing the 50 SMA and RSI has cooled off.
-              </div>
-              <div style="display:flex; gap:24px; border-top: 1px solid var(--border); padding-top:12px; margin-bottom: 16px;">
-                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Dist to 20MA</div><div style="font-family:var(--mono); font-size:14px; color:var(--green);">+0.5%</div></div>
-                  <div><div style="font-size:10px; color:var(--muted); margin-bottom:4px; text-transform:uppercase;">Trend</div><div style="font-family:var(--mono); font-size:14px; color:var(--text);">NEUTRAL</div></div>
-              </div>
-              <div style="background: var(--bg-deep); padding: 12px; border-radius: 6px; font-size: 13px; color:var(--text); border:1px solid var(--border);">
-                  <strong style="color:var(--text); margin-right:8px;">⚡ ACTION</strong> Scan this sector for stocks successfully testing their 50-day moving averages on low volume. Buy the bounce.
-              </div>
-          </div>
-        </div>
-      
-      </div>
-
-      
-      <div class="section-wrap">
-        <div class="section-title" style="letter-spacing:1px;">RECENT SESSION HISTORY</div>
-        <table class="history-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>SPY</th>
-              <th>QQQ</th>
-              <th>VIX</th>
-              <th>ADX</th>
-              <th>Breadth</th>
-              <th>Breadth Δ</th>
-              <th>Verdict</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-              <tr class="">
-                <td>10 Mar </td>
-                <td>$677</td>
-                <td>$608</td>
-                <td>24.9</td>
-                <td>23.3</td>
-                <td>38%</td>
-                <td class="">-</td>
-                <td><span class="badge badge-muted">Insufficient Data</span></td>
-              </tr>
-              <tr class="">
-                <td>11 Mar </td>
-                <td>$676</td>
-                <td>$608</td>
-                <td>24.2</td>
-                <td>24.3</td>
-                <td>39%</td>
-                <td class="green">+1.2%</td>
-                <td><span class="badge badge-muted">✅ BULLISH — LOOK FOR SETUPS TODAY</span></td>
-              </tr>
-              <tr class="">
-                <td>12 Mar </td>
-                <td>$666</td>
-                <td>$597</td>
-                <td>27.3</td>
-                <td>25.9</td>
-                <td>32%</td>
-                <td class="red">-7.2%</td>
-                <td><span class="badge badge-muted">🚨 TECH LAGGING — STAY SIDELINED TODAY</span></td>
-              </tr>
-              <tr class="latest">
-                <td>13 Mar <span class="latest-marker">◀</span></td>
-                <td>$662</td>
-                <td>$594</td>
-                <td>27.2</td>
-                <td>27.7</td>
-                <td>32%</td>
-                <td class="green">+20.0%</td>
-                <td><span class="badge badge-muted">🚨 TECH LAGGING — STAY SIDELINED TODAY</span></td>
-              </tr>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div>
+    <div class="section-title">🔴 Sectors to Avoid</div>
     
-
-      <div class="footer">
-        <div>Sector Momentum Tracker • Powered by karakal.io</div>
-        <div style="margin-top: 12px;">
-          <a href="http://www.market-regime-report.com" target="_blank">Live Dashboard</a> • 
-          <a href="https://github.com/Karakal9/market-report" target="_blank">Source Code</a>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Technology <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-2.0% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
         </div>
-      </div>
-    </div>
-    
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Health Care <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-5.5% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Financials <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-4.7% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Consumer Discretionary <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-4.0% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Industrials <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-8.0% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ffd166;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ffd166;font-weight:bold;display:flex;align-items:center;gap:8px;">Energy <span style="background:#2d2000;color:#ffd166;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">OVERBOUGHT</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ffd166;">+1.2% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">RSI Overbought (70.2) — momentum exhaustion likely near term.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Materials <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-7.6% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  <div>Sector Momentum Tracker &nbsp;·&nbsp; karakal.io</div>
+  <div style="margin-top:12px;">
+    <a href="http://www.market-regime-report.com" target="_blank">Live Dashboard</a> &nbsp;·&nbsp;
+    <a href="https://github.com/Karakal9/market-report" target="_blank">Source Code</a>
+  </div>
+</div>
+
+</div></body>
+
     <script>
-      am4core.ready(function() {
-        am4core.useTheme(am4themes_animated);
-        const tmConfig = {
-          "type": "TreeMap",
-          "dataFields": { "value": "marketCap", "name": "sector", "color": "color" },
-          "zoomable": false,
-          "seriesTemplates": {
-            "0": {
-              "type": "TreeMapSeries",
-              "columns": { "template": { "type": "Column", "fillOpacity": 0.95, "strokeOpacity": 1, "stroke": "#070d1a", "strokeWidth": 2 } }
-            }
-          },
-          "data": [{"sector":"Technology","ticker":"XLK","marketCap":29.8,"weight":"29.8","dayReturn":"-0.75","ytdReturn":"-5.20","color":"#475569"},{"sector":"Health Care","ticker":"XLV","marketCap":12.9,"weight":"12.9","dayReturn":"-0.25","ytdReturn":"-3.68","color":"#475569"},{"sector":"Financials","ticker":"XLF","marketCap":12.8,"weight":"12.8","dayReturn":"+0.12","ytdReturn":"-11.00","color":"#475569"},{"sector":"Consumer Discretionary","ticker":"XLY","marketCap":10.3,"weight":"10.3","dayReturn":"-0.59","ytdReturn":"-6.33","color":"#475569"},{"sector":"Communication Services","ticker":"XLC","marketCap":8.9,"weight":"8.9","dayReturn":"-0.71","ytdReturn":"-2.10","color":"#475569"},{"sector":"Industrials","ticker":"XLI","marketCap":8.5,"weight":"8.5","dayReturn":"-0.36","ytdReturn":"+4.22","color":"#475569"},{"sector":"Consumer Staples","ticker":"XLP","marketCap":6.1,"weight":"6.1","dayReturn":"+0.58","ytdReturn":"+9.07","color":"#475569"},{"sector":"Energy","ticker":"XLE","marketCap":4.1,"weight":"4.1","dayReturn":"+0.33","ytdReturn":"+26.40","color":"#475569"},{"sector":"Utilities","ticker":"XLU","marketCap":2.4,"weight":"2.4","dayReturn":"+0.99","ytdReturn":"+8.75","color":"#475569"},{"sector":"Real Estate","ticker":"XLRE","marketCap":2.3,"weight":"2.3","dayReturn":"+0.26","ytdReturn":"+4.63","color":"#475569"},{"sector":"Materials","ticker":"XLB","marketCap":2.2,"weight":"2.2","dayReturn":"-0.99","ytdReturn":"+6.66","color":"#475569"}]
-        };
-        const chart = am4core.createFromConfig(tmConfig, "treemap-div", am4charts.TreeMap);
-        const series = chart.seriesTemplates.create("0");
-        const colTemplate = series.columns.template;
-        colTemplate.tooltipText = "[bold fontSize='16px']{sector}[/]\nDay: {dayReturn}%\nYTD: {ytdReturn}%";
-        const bullet = series.bullets.push(new am4charts.LabelBullet());
-        bullet.locationX = 0.5;
-        bullet.locationY = 0.5;
-        bullet.label.text = "[bold]{sector}[/]\n{dayReturn}%";
-        bullet.label.fill = am4core.color("#ffffff");
-        bullet.label.truncate = true;
-        bullet.label.hideOversized = true;
-        bullet.label.textAlign = "middle";
-        chart.events.on("ready", function() {
-          colTemplate.tooltip = new am4core.Tooltip();
-          colTemplate.tooltip.getFillFromObject = false;
-          colTemplate.tooltip.background.fill = am4core.color("#ffffff");
-          colTemplate.tooltip.background.stroke = am4core.color("#cbd5e1");
-          colTemplate.tooltip.background.strokeWidth = 2;
-          colTemplate.tooltip.label.fill = am4core.color("#0f172a");
-          colTemplate.tooltip.animationDuration = 100;
-        });
-      });
+    // ── Treemap ───────────────────────────────────────────────────────────────
+    am4core.ready(function() {
+      am4core.useTheme(am4themes_animated);
+      const chart = am4core.createFromConfig({
+        "type":        "TreeMap",
+        "dataFields":  { "value": "marketCap", "name": "sector", "color": "color" },
+        "zoomable":    false,
+        "maxLevels":   1,
+        "data":        [{"sector":"Technology","ticker":"XLK","marketCap":29.8,"weight":"29.8","dayReturn":"-0.75","ytdReturn":"-5.20","color":"#475569"},{"sector":"Health Care","ticker":"XLV","marketCap":12.9,"weight":"12.9","dayReturn":"-0.25","ytdReturn":"-3.68","color":"#475569"},{"sector":"Financials","ticker":"XLF","marketCap":12.8,"weight":"12.8","dayReturn":"+0.12","ytdReturn":"-11.00","color":"#475569"},{"sector":"Consumer Discretionary","ticker":"XLY","marketCap":10.3,"weight":"10.3","dayReturn":"-0.59","ytdReturn":"-6.33","color":"#475569"},{"sector":"Communication Services","ticker":"XLC","marketCap":8.9,"weight":"8.9","dayReturn":"-0.71","ytdReturn":"-2.10","color":"#475569"},{"sector":"Industrials","ticker":"XLI","marketCap":8.5,"weight":"8.5","dayReturn":"-0.36","ytdReturn":"+4.22","color":"#475569"},{"sector":"Consumer Staples","ticker":"XLP","marketCap":6.1,"weight":"6.1","dayReturn":"+0.58","ytdReturn":"+9.07","color":"#475569"},{"sector":"Energy","ticker":"XLE","marketCap":4.1,"weight":"4.1","dayReturn":"+0.33","ytdReturn":"+26.40","color":"#475569"},{"sector":"Utilities","ticker":"XLU","marketCap":2.4,"weight":"2.4","dayReturn":"+0.99","ytdReturn":"+8.75","color":"#475569"},{"sector":"Real Estate","ticker":"XLRE","marketCap":2.3,"weight":"2.3","dayReturn":"+0.26","ytdReturn":"+4.63","color":"#475569"},{"sector":"Materials","ticker":"XLB","marketCap":2.2,"weight":"2.2","dayReturn":"-0.99","ytdReturn":"+6.66","color":"#475569"}]
+      }, "treemap-div", am4charts.TreeMap);
 
-      // Plotly Relative Performance Chart
-      const tData = [{"date":"2026-01-30","SPY":0,"XLK":0,"XLV":0,"XLF":0,"XLY":0,"XLC":0,"XLI":0,"XLP":0,"XLE":0,"XLU":0,"XLRE":0,"XLB":0},{"date":"2026-02-02","SPY":0.49713137852795963,"XLK":0.9591326105087505,"XLV":0.6139330489853823,"XLF":1.104041916167664,"XLY":0.660229429726833,"XLC":-0.3414390406395684,"XLI":1.2632978723404298,"XLP":1.1854867680517245,"XLE":-1.9588638589618013,"XLU":-1.4566473988439355,"XLRE":-1.1344436398744828,"XLB":0.7712604018672575},{"date":"2026-02-03","SPY":-0.35261644290938143,"XLK":-1.2510425354461896,"XLV":-0.4135970014217505,"XLF":0.16841317365270392,"XLY":-0.14855162168854186,"XLC":-1.9487008660892813,"XLI":2.115570599613159,"XLP":2.8260088612142242,"XLE":1.2144955925563305,"XLU":-0.02312138728323143,"XLRE":-1.4965001206854844,"XLB":2.902374670184704},{"date":"2026-02-04","SPY":-0.8352963278754788,"XLK":-4.003336113427847,"XLV":0.8336564559906945,"XLF":0.9730538922155807,"XLY":-0.8830568622596457,"XLC":-2.731512325116592,"XLI":2.387572533849114,"XLP":4.167165608909107,"XLE":3.4867776689520014,"XLU":-0.39306358381503426,"XLRE":0.07241129616220032,"XLB":5.317637507611117},{"date":"2026-02-05","SPY":-2.0737893261268625,"XLK":-5.733944954128445,"XLV":0.06462453147213498,"XLF":-0.280688622754488,"XLY":-3.0205496410002475,"XLC":-3.222851432378415,"XLI":1.7710348162475853,"XLP":4.083343312178167,"XLE":2.272282076395693,"XLU":-0.3468208092485492,"XLRE":-0.4827419744146799,"XLB":2.4964481428861207},{"date":"2026-02-06","SPY":-0.19509516308511277,"XLK":-1.911314984709478,"XLV":1.9193485847227576,"XLF":1.5344311377245567,"XLY":-2.6244119831641544,"XLC":-3.5976015989340415,"XLI":4.678433268858817,"XLP":5.304753921686012,"XLE":4.309500489715967,"XLU":0.23121387283238093,"XLRE":1.351677528361095,"XLB":4.54637710574386},{"date":"2026-02-09","SPY":0.2861395725248128,"XLK":-0.36836252432582706,"XLV":1.021067597259906,"XLF":0.9356287425149601,"XLY":-2.9875381695139147,"XLC":-2.664890073284476,"XLI":4.99274661508704,"XLP":4.6940486169321005,"XLE":5.073457394711078,"XLU":0.531791907514445,"XLRE":1.9792420951001644,"XLB":5.9062309721940265},{"date":"2026-02-10","SPY":0.02167724034278784,"XLK":-0.9243814289685792,"XLV":0.3812847356856608,"XLF":0.20583832335330232,"XLY":-2.343814475530248,"XLC":-2.0819453697535018,"XLI":5.119680851063824,"XLP":4.358759430008385,"XLE":4.955925563173369,"XLU":2.19653179190753,"XLRE":3.4033309196234596,"XLB":7.387862796833766},{"date":"2026-02-11","SPY":-0.0014451493561828954,"XLK":-0.6324715040311402,"XLV":0.9758304252294181,"XLF":-1.3098802395209552,"XLY":-2.814227944210612,"XLC":-2.781479013990673,"XLI":5.681818181818188,"XLP":5.855586157346426,"XLE":7.698334965719877,"XLU":3.098265895953767,"XLRE":3.306782524740526,"XLB":8.82890196874364},{"date":"2026-02-12","SPY":-1.5463098111189844,"XLK":-3.2457603558520898,"XLV":0.8142690965490473,"XLF":-3.2747005988023936,"XLY":-4.159445407279039,"XLC":-4.530313124583607,"XLI":4.418520309477758,"XLP":6.825529876661474,"XLE":5.739471106758076,"XLU":4.6242774566473965,"XLRE":3.47574221578566,"XLB":7.225492185914328},{"date":"2026-02-13","SPY":-1.476942642022061,"XLK":-3.0025020850708906,"XLV":1.8934987721338947,"XLF":-3.3495508982035904,"XLY":-4.118181067921101,"XLC":-4.580279813457699,"XLI":5.276837524177935,"XLP":7.18476829122261,"XLE":6.464250734573951,"XLU":7.514450867052025,"XLRE":4.996379435191889,"XLB":8.199715851430888},{"date":"2026-02-17","SPY":-1.3179762128415984,"XLK":-3.0581039755351758,"XLV":1.6996251777174676,"XLF":-2.320359281437112,"XLY":-4.233721218123298,"XLC":-4.730179880079943,"XLI":5.8268858800773815,"XLP":5.616093880972328,"XLE":5.288932419196879,"XLU":7.236994219653181,"XLRE":6.05841177890416,"XLB":6.961639943170295},{"date":"2026-02-18","SPY":-0.8208448343136387,"XLK":-2.064220183486243,"XLV":1.8934987721338947,"XLF":-1.5905688622754433,"XLY":-3.424940166707935,"XLC":-4.571952031978677,"XLI":5.802707930367501,"XLP":5.424500059873072,"XLE":7.306562193927535,"XLU":5.456647398843928,"XLRE":4.634322954380887,"XLB":7.611122386847979},{"date":"2026-02-19","SPY":-1.0824168677832868,"XLK":-2.5507367250486412,"XLV":1.6285381930980947,"XLF":-2.4139221556886192,"XLY":-4.06866386069159,"XLC":-4.113924050632911,"XLI":6.588491295938104,"XLP":4.981439348580996,"XLE":8.090107737512241,"XLU":6.612716763005788,"XLRE":4.272266473569886,"XLB":7.225492185914328},{"date":"2026-02-20","SPY":-0.3670679364712437,"XLK":-2.0850708924103456,"XLV":1.3441902546206475,"XLF":-1.7776946107784353,"XLY":-3.0700668482297577,"XLC":-2.731512325116592,"XLI":7.1264506769825875,"XLP":5.244880852592493,"XLE":7.502448579823717,"XLU":7.121387283236991,"XLRE":5.1412020275162895,"XLB":7.4893444286584065},{"date":"2026-02-23","SPY":-1.384453083226156,"XLK":-3.725326661106465,"XLV":2.4557321959415734,"XLF":-5.071107784431139,"XLY":-5.100272344639767,"XLC":-3.9307128580945982,"XLI":5.675773694390718,"XLP":6.538139145012556,"XLE":8.031341821743387,"XLU":7.9306358381502795,"XLRE":5.261887521119957,"XLB":7.4893444286584065},{"date":"2026-02-24","SPY":-0.6676590025579188,"XLK":-2.4742841256602754,"XLV":2.022747835078187,"XLF":-4.60329341317366,"XLY":-3.656020467112331,"XLC":-3.264490339773485,"XLI":6.975338491295924,"XLP":7.460184409052806,"XLE":7.933398628795318,"XLU":9.132947976878626,"XLRE":5.551532705768758,"XLB":8.301197483255528},{"date":"2026-02-25","SPY":0.17052762402993693,"XLK":-0.6046705587990031,"XLV":1.9968980224893462,"XLF":-2.937874251497008,"XLY":-3.3671700916068303,"XLC":-2.9813457694870094,"XLI":6.141199226305605,"XLP":6.586037600287398,"XLE":7.482859941234077,"XLU":9.502890173410394,"XLRE":4.851556842867488,"XLB":7.692307692307687},{"date":"2026-02-26","SPY":-0.38585487810166574,"XLK":-1.9947178204059002,"XLV":1.731937443453524,"XLF":-1.758982035928136,"XLY":-3.400181563093174,"XLC":-2.7981345769486965,"XLI":6.806092843326872,"XLP":6.406418393006819,"XLE":7.835455435847205,"XLU":9.086705202312139,"XLRE":5.310161718561446,"XLB":7.570529734118114},{"date":"2026-02-27","SPY":-0.8641993149992033,"XLK":-3.558520989713654,"XLV":3.528499418379205,"XLF":-3.761227544910173,"XLY":-3.5569860526532993,"XLC":-1.690539640239841,"XLI":7.072050290135379,"XLP":7.7834989821578215,"XLE":9.539666993143992,"XLU":10.358381502890168,"XLRE":5.817040791696848,"XLB":8.402679115080147},{"date":"2026-03-02","SPY":-0.8078384901079594,"XLK":-3.016402557686959,"XLV":2.4492697427943577,"XLF":-4.004491017964074,"XLY":-4.745399026161589,"XLC":-1.8404397068620848,"XLI":8.13588007736945,"XLP":6.2267991857262395,"XLE":11.733594515181188,"XLU":9.526011560693636,"XLRE":6.010137581462716,"XLB":8.077937893241316},{"date":"2026-03-03","SPY":-1.682153850600454,"XLK":-4.434250764525993,"XLV":1.292490629442944,"XLF":-4.172904191616755,"XLY":-5.620203020549641,"XLC":-1.7654896735509684,"XLI":6.04448742746615,"XLP":5.065261645311936,"XLE":10.714985308521063,"XLU":8.83236994219654,"XLRE":5.47912140960658,"XLB":5.419119139435757},{"date":"2026-03-04","SPY":-0.9884821596311988,"XLK":-2.80789546844592,"XLV":1.4928266770065868,"XLF":-3.6302395209580784,"XLY":-3.944870842617809,"XLC":-1.0742838107927977,"XLI":6.364845261121865,"XLP":4.370734043827085,"XLE":10.06856023506366,"XLU":9.294797687861278,"XLRE":5.623944001930958,"XLB":5.378526486705892},{"date":"2026-03-05","SPY":-1.5405292136942417,"XLK":-2.571587433972744,"XLV":-0.5363836112188269,"XLF":-4.135479041916168,"XLY":-3.812824956672445,"XLC":-1.365756162558296,"XLI":4.0014506769825875,"XLP":2.2751766255538097,"XLE":10.63663075416259,"XLU":8.439306358381504,"XLRE":4.610185855660154,"XLB":3.16622691292876},{"date":"2026-03-06","SPY":-2.8310475887682984,"XLK":-4.580205726994723,"XLV":-1.3183404420318068,"XLF":-5.370508982035926,"XLY":-5.554180077576964,"XLC":-2.1818787475016643,"XLI":2.7200193423597696,"XLP":2.7182373368458856,"XLE":10.812928501469155,"XLU":8.069364161849713,"XLRE":3.5240164132271268,"XLB":1.1974832555307513},{"date":"2026-03-09","SPY":-1.9798546179747745,"XLK":-2.8634973589102053,"XLV":-0.3101977510663212,"XLF":-5.819610778443119,"XLY":-5.430387059503172,"XLC":-2.098600932711525,"XLI":3.32446808510638,"XLP":2.945754999401262,"XLE":10.323212536728699,"XLU":8.323699421965314,"XLRE":3.7412503017137277,"XLB":1.4613354982748072},{"date":"2026-03-10","SPY":-2.137375897799043,"XLK":-2.8634973589102053,"XLV":-1.0275300504071327,"XLF":-6.324850299401186,"XLY":-5.554180077576964,"XLC":-2.24850099933378,"XLI":2.7683752417795082,"XLP":2.646389653933645,"XLE":8.912830558276209,"XLU":7.653179190751458,"XLRE":3.596427709389327,"XLB":1.238075908260594},{"date":"2026-03-11","SPY":-2.2602135930748446,"XLK":-2.3978315262718874,"XLV":-1.221403644823582,"XLF":-7.110778443113763,"XLY":-5.801766113724516,"XLC":-2.5649566955363023,"XLI":2.4480174081237926,"XLP":1.293258292420063,"XLE":11.61606268364348,"XLU":6.751445086705199,"XLRE":2.3654356746318994,"XLB":1.1568906028008863},{"date":"2026-03-12","SPY":-3.7443819818778423,"XLK":-4.197942730052818,"XLV":-2.959803541424333,"XLF":-8.626497005988021,"XLY":-7.964017496079889,"XLC":-4.005662891405737,"XLI":-0.12088974854931323,"XLP":0.8861214225841074,"XLE":12.654260528893246,"XLU":7.514450867052025,"XLRE":1.7137340091720965,"XLB":0.8321493809620328},{"date":"2026-03-13","SPY":-4.289203289159948,"XLK":-4.920767306088392,"XLV":-3.198914307871281,"XLF":-8.514221556886225,"XLY":-8.508706775604525,"XLC":-4.688540972684874,"XLI":-0.4775145067698161,"XLP":1.47287749970062,"XLE":13.026444662095994,"XLU":8.578034682080936,"XLRE":1.9792420951001644,"XLB":-0.16237061091943783}];
-      if (tData.length > 0) {
-        const tickers = ['SPY', ...["XLK","XLV","XLF","XLY","XLC","XLI","XLP","XLE","XLU","XLRE","XLB"]];
-        const colors = ['#ffffff', '#00d4a0', '#ff4d6d', '#ffd166', '#ff9f43', '#4d96ff', '#9b59b6', '#1abc9c', '#e67e22', '#34495e', '#ecf0f1', '#95a5a6'];
-        const traces = tickers.map((ticker, i) => ({
-          x: tData.map(d => d.date),
-          y: tData.map(d => d[ticker]),
+      const series = chart.seriesTemplates.create("0");
+      const col    = series.columns.template;
+      col.fillOpacity    = 0.92;
+      col.strokeOpacity  = 1;
+      col.stroke         = am4core.color("#070d1a");
+      col.strokeWidth    = 2;
+      col.column.cornerRadiusTopLeft     = 4;
+      col.column.cornerRadiusTopRight    = 4;
+      col.column.cornerRadiusBottomLeft  = 4;
+      col.column.cornerRadiusBottomRight = 4;
+      col.tooltipText = "[bold fontSize:'15px']{sector}[/]\nWeight: {weight}%\nDay: {dayReturn}%\nYTD: {ytdReturn}%";
+      const hover = col.states.create("hover");
+      hover.properties.fillOpacity = 1;
+
+      const bullet = series.bullets.push(new am4charts.LabelBullet());
+      bullet.locationX = 0.5; bullet.locationY = 0.5;
+      bullet.label.text = "[bold]{sector}[/]\n{dayReturn}%";
+      bullet.label.fill = am4core.color("#ffffff");
+      bullet.label.fontSize = 13;
+      bullet.label.truncate = true; bullet.label.hideOversized = true;
+      bullet.label.textAlign = "middle"; bullet.label.wrap = true;
+      bullet.label.maxWidth = 100;
+
+      chart.events.on("ready", function() {
+        if (col.tooltip) {
+          col.tooltip.getFillFromObject    = false;
+          col.tooltip.background.fill      = am4core.color("#0d1626");
+          col.tooltip.background.stroke    = am4core.color("#1e3050");
+          col.tooltip.background.strokeWidth = 1;
+          col.tooltip.label.fill           = am4core.color("#e2eaf5");
+          col.tooltip.animationDuration    = 100;
+        }
+      });
+    });
+
+    // ── FIX 3: Plotly SPY vs Sectors — solid lines, grouped tooltip ──────────
+    (function() {
+      const dates   = ["2025-12-08","2025-12-09","2025-12-10","2025-12-11","2025-12-12","2025-12-15","2025-12-16","2025-12-17","2025-12-18","2025-12-19","2025-12-22","2025-12-23","2025-12-24","2025-12-26","2025-12-29","2025-12-30","2025-12-31","2026-01-02","2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-20","2026-01-21","2026-01-22","2026-01-23","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13"];
+      const relPerf = {"SPY":[0,-0.0863,0.5763,0.8104,-0.2735,-0.4242,-0.6963,-1.789,-1.0474,-0.4447,0.1755,0.6334,0.9874,0.9771,0.6173,0.4944,-0.2501,-0.0673,0.5983,1.1966,0.8704,0.8601,1.5271,1.6866,1.4833,0.9845,1.2595,1.1746,-0.885,0.2589,0.7826,0.8192,1.3311,1.7349,1.7246,1.5228,1.22,1.7232,0.863,0.3745,-0.8791,1.0225,1.5096,1.2419,1.2185,-0.3452,-0.275,-0.1141,0.3891,0.1243,0.8484,-0.1814,0.5442,1.3926,0.8294,0.3452,0.4023,-0.4827,0.2194,-0.3394,-1.6456,-0.784,-0.9435,-1.0678,-2.5701,-3.1216],"XLK":[0,0.2642,0.7451,0.2303,-2.6688,-3.6104,-3.4343,-5.5815,-4.1252,-2.0524,-1.6731,-1.138,-0.9009,-0.7451,-1.1922,-1.5038,-2.4792,-2.2556,-2.0389,-0.6638,-0.7451,-2.2963,-1.0025,-0.569,-0.779,-1.9847,-1.4699,-1.3615,-3.922,-2.5875,-1.8628,-1.7205,-1.0499,0.2845,1.0838,-0.5148,-2.5401,-1.6054,-3.7594,-6.4418,-8.1284,-4.4029,-2.8991,-3.441,-3.1565,-5.7034,-5.4664,-5.5206,-4.5519,-5.0261,-4.5722,-6.1708,-4.9516,-3.1294,-4.4842,-6.0083,-5.4799,-6.8617,-5.2767,-5.0464,-7.004,-5.3309,-5.3309,-4.8771,-6.6314,-7.3359],"XLV":[0,-0.9707,0.4689,1.4198,1.7368,3.0839,1.7434,1.5585,1.6377,2.3179,2.5556,2.3509,2.8858,3.0509,2.8924,2.8066,2.2255,2.6943,2.3839,4.3981,5.4349,4.4179,3.883,3.9292,3.5066,4.2462,3.6519,2.8462,2.6217,4.5103,4.5301,3.9952,4.4047,2.6547,1.9019,1.5783,2.1858,2.8132,1.7632,3.0377,2.2519,4.1471,3.2292,2.5754,3.183,3.0179,4.1207,3.9226,4.1207,3.85,3.5594,4.6952,4.2528,4.2264,3.9556,5.7915,4.6886,3.5066,3.7113,1.6377,0.8387,1.8689,1.1358,0.9377,-0.8387,-1.083],"XLF":[0,-0.374,0.7666,2.5991,2.7487,2.8235,2.169,2.1503,1.982,2.543,3.4405,3.6462,4.2072,4.0015,3.4405,3.1788,2.4121,2.7113,4.9551,5.46,3.9828,4.5251,4.2072,3.3844,1.4024,1.2528,1.6642,1.7951,-0.5236,-0.0374,0.6171,-0.7666,-0.1309,-0.8975,-0.9162,0.1309,-0.0748,1.0284,0.0935,0.8975,-0.3553,1.4585,0.8601,0.1309,-1.3837,-3.347,-3.4218,-2.3934,-1.6642,-2.4869,-1.8512,-5.1421,-4.6746,-3.0105,-1.8325,-3.8332,-4.0763,-4.2446,-3.7023,-4.2072,-5.4413,-5.8901,-6.3949,-7.1803,-8.6948,-8.5826],"XLY":[0,-0.0085,1.4578,1.8561,2.2968,3.1698,3.3393,2.1442,3.6868,3.2715,3.6868,3.5427,3.8986,3.441,2.4239,2.0086,1.2035,0.3051,1.9578,2.6104,2.4663,4.1783,5.4411,5.5344,5.2716,3.6105,3.9919,3.6529,0.9577,2.8901,3.9241,4.3563,3.6698,3.9834,3.2037,2.7121,2.6951,3.3732,2.5426,1.7883,-0.4068,0,-0.3729,0.2882,-0.1949,-1.5764,-1.534,-1.6527,-0.8221,-1.4832,-0.4577,-2.5426,-1.0594,-0.7628,-0.7967,-0.9577,-2.1782,-3.0765,-1.356,-1.2204,-3.0087,-2.8816,-3.0087,-3.263,-5.4835,-6.0429],"XLC":[0,0.1118,0.6967,0.4731,0.2494,0.2666,0.3355,-0.3871,0.1806,0.2236,0.3441,0.972,1.5741,1.4708,1.402,1.7461,1.2558,0.5505,1.2816,0.9204,0.7139,1.0494,1.4192,1.1096,0.5419,0.3269,-0.043,-0.9376,-2.3998,-1.402,-0.0086,0.6021,1.2988,0.5505,0.4215,3.0363,3.2857,2.9331,1.273,0.4645,-0.043,-0.4301,0.5333,1.1354,0.4129,-1.3934,-1.445,-1.5999,-1.4364,-0.9634,0.4645,-0.7741,-0.086,0.2064,0.3957,1.5397,1.3848,1.4622,2.1762,1.8751,1.0322,1.1182,0.9634,0.6365,-0.8515,-1.5569],"XLI":[0,-0.7319,1.0817,2.1634,1.5221,1.684,1.0817,-0.557,0.0907,0.9521,1.7229,1.684,2.0144,1.8265,1.6063,1.3149,0.4728,2.3253,3.5365,4.942,2.9665,3.7438,4.8837,5.6869,6.231,6.3994,7.3774,8.1029,5.9201,7.7531,7.1961,6.367,6.4706,6.9111,6.3152,7.4292,7.1572,8.5109,9.4242,9.7157,9.055,12.1705,12.5073,12.6433,13.2457,11.892,12.8117,13.4011,13.3752,14.2172,14.7937,13.2392,14.6318,13.7379,14.4504,14.7354,15.8754,13.6343,13.9776,11.445,10.0719,10.7196,10.1237,9.7804,7.0277,6.6455],"XLP":[0,0.2313,0.5269,1.2723,2.0691,2.3519,1.8892,2.3647,1.7736,1.2466,0.09,-0.3856,0.3984,0.5398,0.604,0.437,-0.1671,-0.1542,-0.5912,-0.437,-1.5294,0.8097,1.8507,3.0459,4.2411,5.6805,5.8604,5.5263,5.8476,5.9504,5.7319,6.5544,6.3874,6.8757,5.7962,5.552,7.3255,8.5979,10.3586,11.798,11.708,13.0189,12.3634,12.0036,13.6101,14.6511,15.0366,13.353,13.1474,12.6719,12.9546,14.3426,15.3322,14.394,14.2013,15.6792,14.0085,12.7619,12.0165,9.7674,10.2429,10.4871,10.1658,8.7135,8.2766,8.9063],"XLE":[0,0.6165,1.6733,1.1889,0.1982,-0.5064,-3.5447,-1.4091,-2.8402,-2.8402,-2.664,-2.0255,-2.3118,-2.686,-1.7613,-1.0128,-1.5632,0.5064,3.2365,0.4844,-0.6385,2.4879,2.7521,2.0255,3.4786,5.8124,4.8217,4.9978,4.7996,7.3316,7.6838,8.3003,8.3664,9.3571,10.1937,11.2065,12.3954,10.1937,13.7605,16.3144,14.9494,17.2391,18.0978,17.9657,21.048,18.8463,19.6609,18.3399,20.6077,21.4883,20.8278,21.4223,21.3122,20.8058,21.2021,23.1176,25.5834,24.4386,23.712,24.3505,24.5487,23.9982,22.413,25.4513,26.6182,27.0365],"XLU":[0,0.0702,0.0234,0.7491,0.2575,1.1704,0.7491,0.0936,1.0768,-0.2107,-0.5852,-0.2341,0.2107,0.1404,0.3277,0.5618,-0.0702,1.0768,-0.0468,0.4448,-1.9897,-1.7088,-0.4916,-0.3277,0.3043,1.0534,2.0833,1.5684,0.5618,0.7022,-0.0234,-0.3745,0.3511,1.662,1.4279,1.4279,1.2406,-0.2341,1.2172,0.8427,0.8895,1.4747,1.779,3.4644,4.3773,5.9223,8.8483,8.5674,6.765,7.9354,8.4504,9.2697,10.4869,10.8614,10.4401,11.7275,10.8848,10.1826,10.6507,9.7846,9.4101,9.6676,8.9888,8.0758,8.8483,9.9251],"XLRE":[0,-0.5891,-0.3927,0.1473,0.0245,0.4173,-0.4664,-0.0245,-0.6382,-1.0064,-1.35,-1.3746,-0.7364,-0.54,-0.27,-0.0491,-0.9573,-0.8837,-0.7609,-0.0982,-1.4728,-0.7364,-0.5891,-0.2946,0.4664,1.5955,2.3564,3.6082,1.62,1.9882,0.9818,1.2518,1.1782,1.2518,0.27,1.5464,1.6937,0.54,0.1718,1.7673,1.2027,3.0682,3.7064,5.1546,5.0565,5.2283,6.7747,7.8547,6.4065,6.0383,6.9219,7.0447,7.3392,6.6274,7.0938,7.6092,7.8056,7.2656,7.4129,6.3819,5.2774,5.4983,5.351,4.0992,3.4364,3.7064],"XLB":[0,-0.207,1.7479,3.7718,3.8408,3.7718,3.4959,3.9328,3.8868,4.3468,5.0368,5.2208,5.4278,6.0488,5.1978,5.1748,4.3008,6.0718,7.1297,9.2456,7.3597,9.2456,10.9936,11.5915,12.0745,12.1205,12.6035,11.9595,10.8326,13.2475,13.8914,14.9264,15.0644,14.9494,14.8804,14.9954,13.3165,14.1904,16.6053,19.3422,16.1454,18.4683,20.0092,21.6881,23.3211,21.5041,22.6081,21.2052,21.9411,21.5041,21.8031,21.8031,22.7231,22.0331,21.8951,22.8381,22.4701,19.4572,19.4112,16.9043,14.6734,14.9724,14.7194,14.6274,14.2594,13.1325]};
+      if (!dates.length) return;
+
+      const COLORS = {"SPY":"#ffd166","XLK":"#a78bfa","XLV":"#fb923c","XLF":"#ef4444","XLY":"#e879f9","XLC":"#4da6ff","XLI":"#f43f5e","XLP":"#86efac","XLE":"#00d4a0","XLU":"#38bdf8","XLRE":"#fb923c","XLB":"#94a3b8"};
+      const ORDER  = ['SPY', 'XLK','XLV','XLF','XLY','XLC','XLI','XLP','XLE','XLU','XLRE','XLB'];
+
+      const traces = ORDER
+        .filter(t => relPerf[t])
+        .map(ticker => ({
+          x:    dates,
+          y:    relPerf[ticker],
           type: 'scatter',
           mode: 'lines',
           name: ticker,
-          line: { color: colors[i % colors.length], width: ticker === 'SPY' ? 4 : 2, dash: ticker === 'SPY' ? 'solid' : 'dot' }
-        }));
-        const layout = {
-          paper_bgcolor: 'rgba(0,0,0,0)',
-          plot_bgcolor: 'rgba(0,0,0,0)',
-          font: { color: '#e2eaf5', family: 'JetBrains Mono, monospace' },
-          margin: { l: 40, r: 20, t: 10, b: 40 },
-          height: 300,
-          showlegend: true,
-          legend: { orientation: 'h', y: -0.2, font: { size: 10 } },
-          xaxis: { 
-            gridcolor: '#1e3050', zeroline: false, 
-            tickfont: { color: '#4a6080', size: 10 },
-            type: 'date',
-            tickformat: '%d %b'
+          // FIX 3a: ALL lines solid — no dash property
+          line: {
+            color: COLORS[ticker] || '#4a6080',
+            width: ticker === 'SPY' ? 3 : 1.5
           },
-          yaxis: { 
-            gridcolor: '#1e3050', zeroline: false, 
-            tickfont: { color: '#4a6080', size: 10 },
-            ticksuffix: '%'
-          }
-        };
-        Plotly.newPlot('trendChart', traces, layout, { displayModeBar: false, responsive: true });
-      }
+          opacity: ticker === 'SPY' ? 1 : 0.75,
+          // FIX 3b: include in unified hover tooltip
+          hovertemplate: '<b>' + ticker + '</b>: %{y:.2f}%<extra></extra>'
+        }));
+
+      // Zero reference line — FIX 3c: solid line, excluded from tooltip
+      traces.push({
+        x:         [dates[0], dates[dates.length - 1]],
+        y:         [0, 0],
+        mode:      'lines',
+        line:      { color: '#1e3050', width: 1 },  // solid, no dash
+        showlegend: false,
+        hoverinfo: 'skip'                                    // excluded from grouped tooltip
+      });
+
+      const layout = {
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor:  '#0d1626',
+        font:  { color: '#e2eaf5', family: 'JetBrains Mono, monospace', size: 11 },
+        margin: { l: 50, r: 20, t: 16, b: 50 },
+        height: 380,
+        // FIX 3d: x unified groups all sector lines into one tooltip per date
+        hovermode: 'x unified',
+        hoverlabel: {
+          bgcolor:     '#111f35',
+          bordercolor: '#1e3050',
+          font: { color: '#e2eaf5', size: 11, family: 'JetBrains Mono, monospace' },
+          align: 'left'
+        },
+        legend: {
+          orientation: 'h', y: -0.18,
+          font: { size: 11, color: '#4a6080' },
+          bgcolor: 'rgba(0,0,0,0)'
+        },
+        xaxis: {
+          gridcolor:  '#1e3050',
+          zeroline:   false,
+          tickfont:   { color: '#4a6080', size: 10 },
+          type:       'date',
+          tickformat: '%d %b'
+        },
+        yaxis: {
+          gridcolor:       '#1e3050',
+          zerolinecolor:   '#1e3050',
+          zerolinewidth:   1,
+          tickfont:        { color: '#4a6080', size: 10 },
+          ticksuffix:      '%',
+          title: { text: 'Relative Return vs Day 1', font: { color: '#4a6080', size: 10 } }
+        }
+      };
+
+      Plotly.newPlot('relPerfChart', traces, layout, { displayModeBar: false, responsive: true });
+    })();
     </script>
-  
-  </body></html>
+</html>
