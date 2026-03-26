@@ -15,7 +15,7 @@
         --bg-deep:#070d1a; --bg-card:#0d1626; --bg-raised:#111f35;
         --border:#1e3050; --text:#e2eaf5; --muted:#4a6080;
         --green:#00d4a0; --green-dim:#002e22;
-        --red:#ff4d6d; --red-dim:#2d0010;
+        --red:#ff4d6d;     --red-dim:#2d0010;
         --yellow:#ffd166; --yellow-dim:#2d2000;
         --orange:#ff9f43; --blue:#4da6ff;
         --mono:'JetBrains Mono',monospace; --sans:'Syne',sans-serif;
@@ -64,13 +64,14 @@
 <body><div class="page">
 
 <!-- ══ HEADER ══ -->
+<!-- FIX 1: All colors use THEME hex — no CSS var() strings in inline styles -->
 <div class="report-header">
   <div>
     <div style="font-size:11px;font-family:monospace;color:#4a6080;margin-bottom:6px;letter-spacing:.1em;">SECTOR MOMENTUM ANALYSIS</div>
     <div class="report-title" style="color:#e2eaf5;">Daily Market Report</div>
   </div>
   <div class="report-meta">
-    <div style="color:#4a6080;">Session: <b style="color:#e2eaf5;">24 Mar 2026</b></div>
+    <div style="color:#4a6080;">Session: <b style="color:#e2eaf5;">25 Mar 2026</b></div>
     <div style="color:#4a6080;">Generated pre-market</div>
     <div style="margin-top:4px;color:#4a6080;">
       <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff9f43;box-shadow:0 0 5px #ff9f43;margin-right:5px;vertical-align:middle;"></span>
@@ -82,6 +83,7 @@
 <!-- ══ REGIME ══ -->
 <div class="section-wrap">
   <div class="section-title">🧭 Market Regime</div>
+
   <div style="background:#1a0a00;border:1px solid #ff9f43;border-radius:10px;padding:20px 24px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
     <div>
       <div style="font-size:18px;font-weight:800;color:#ff9f43;margin-bottom:4px;">📉 BEARISH TREND — REDUCED EXPOSURE TODAY</div>
@@ -91,44 +93,49 @@
       STRATEGY: LOOK FOR PULLBACK SETUPS ONLY
     </div>
   </div>
+
   
     <div class="regime-grid">
       <div class="metric-card">
         <div class="metric-label">SPY Price</div>
-        <div class="metric-val" style="color:#e2eaf5;">$653.18</div>
-        <div class="metric-sub">200 SMA: <b>$658.63</b></div>
-        <div class="metric-sub"><span class="dot dot-red"></span><span style="color:#ff4d6d;">Below SMA (-0.8%)</span></div>
+        <div class="metric-val" style="color:#e2eaf5;">$656.82</div>
+        <div class="metric-sub">200 SMA: <b>$658.97</b></div>
+        <div class="metric-sub"><span class="dot dot-red"></span><span style="color:#ff4d6d;">Below SMA (-0.3%)</span></div>
       </div>
       <div class="metric-card">
         <div class="metric-label">QQQ Price</div>
-        <div class="metric-val" style="color:#e2eaf5;">$583.98</div>
-        <div class="metric-sub">200 SMA: <b>$591.04</b></div>
+        <div class="metric-val" style="color:#e2eaf5;">$587.82</div>
+        <div class="metric-sub">200 SMA: <b>$591.38</b></div>
         <div class="metric-sub"><span class="dot dot-yellow"></span><span style="color:#ffd166;">Lagging SPY</span></div>
       </div>
       <div class="metric-card">
         <div class="metric-label">VIX · Fear Gauge</div>
-        <div class="metric-val" style="color:#ff4d6d;">26.95</div>
+        <div class="metric-val" style="color:#ff4d6d;">25.33</div>
         <div class="metric-sub" style="font-size:10px;"><span style="color:#00d4a0;">▪ &lt;15 Calm</span> &nbsp;<span style="color:#ffd166;">▪ 15–28</span> &nbsp;<span style="color:#ff4d6d;">▪ &gt;28 ⚠</span></div>
       </div>
       <div class="metric-card">
         <div class="metric-label">ADX · Trend (14D)</div>
-        <div class="metric-val" style="color:#00d4a0;">37.99</div>
+        <div class="metric-val" style="color:#00d4a0;">38.39</div>
         <div class="metric-sub"><span class="dot dot-green"></span><span style="color:#00d4a0;">Strong (&gt;25)</span></div>
         <div class="metric-sub">Strong trend</div>
       </div>
     </div>
+
   <div class="breadth-card">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
       <div class="metric-label">Breadth · $SPXA50R</div>
-      <div style="font-size:11px;color:#4a6080;">🔴 Washed Out</div>
+      <div style="font-size:11px;color:#4a6080;">🟡 Below Average</div>
     </div>
     <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:12px;">
-      <span style="font-family:monospace;font-size:28px;font-weight:800;color:#ffd166;">24.1%</span>
-      <span style="font-family:monospace;font-size:13px;color:#4a6080;">Δ <span style="color:#00d4a0;">+1.2%</span> from prev session</span>
+      <span style="font-family:monospace;font-size:28px;font-weight:800;color:#ffd166;">27.2%</span>
+      <span style="font-family:monospace;font-size:13px;color:#4a6080;">Δ <span style="color:#00d4a0;">+3.2%</span> from prev session</span>
     </div>
-    <div class="breadth-track"><div class="breadth-fill" style="width:24.05%;"></div></div>
+    <div class="breadth-track">
+      <div class="breadth-fill" style="width:27.23%;"></div>
+    </div>
     <div class="breadth-labels"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
   </div>
+
   
       <div style="background:#0d1626;border:1px solid #1e3050;border-radius:8px;overflow:hidden;margin-top:20px;">
         <div style="padding:12px 16px;border-bottom:1px solid #1e3050;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a6080;">Recent Session History</div>
@@ -136,16 +143,6 @@
           <thead><tr><th>Date</th><th>SPY</th><th>QQQ</th><th>VIX</th><th>ADX</th><th>Breadth %</th><th>Breadth Δ</th><th>Verdict</th></tr></thead>
           <tbody>
             
-                <tr class="">
-                  <td style="color:#4a6080;">18 Mar</td>
-                  <td>$661</td>
-                  <td>$595</td>
-                  <td style="color:#ffd166;">25.1</td>
-                  <td style="color:#00d4a0;">32.0</td>
-                  <td style="color:#ffd166;">28.2%</td>
-                  <td style="color:#e2eaf5;">—</td>
-                  <td><span class="badge badge-muted">Insufficient Data</span></td>
-                </tr>
                 <tr class="">
                   <td style="color:#4a6080;">19 Mar</td>
                   <td>$660</td>
@@ -176,14 +173,24 @@
                   <td style="color:#00d4a0;">+3.8%</td>
                   <td><span class="badge badge-yellow">📉 BEARISH TREND</span></td>
                 </tr>
-                <tr class="latest">
-                  <td style="color:#ffd166;">24 Mar <span style="font-size:10px;color:#ffd166;">◀</span></td>
+                <tr class="">
+                  <td style="color:#4a6080;">24 Mar</td>
                   <td>$653</td>
                   <td>$584</td>
                   <td style="color:#ffd166;">26.9</td>
                   <td style="color:#00d4a0;">38.0</td>
                   <td style="color:#ffd166;">24.1%</td>
                   <td style="color:#00d4a0;">+1.2%</td>
+                  <td><span class="badge badge-yellow">📉 BEARISH TREND</span></td>
+                </tr>
+                <tr class="latest">
+                  <td style="color:#ffd166;">25 Mar <span style="font-size:10px;color:#ffd166;">◀</span></td>
+                  <td>$657</td>
+                  <td>$588</td>
+                  <td style="color:#ffd166;">25.3</td>
+                  <td style="color:#00d4a0;">38.4</td>
+                  <td style="color:#ffd166;">27.2%</td>
+                  <td style="color:#00d4a0;">+3.2%</td>
                   <td><span class="badge badge-yellow">📉 BEARISH TREND</span></td>
                 </tr>
           </tbody>
@@ -197,7 +204,7 @@
   
     <div style="background:#2d0010;border:1px solid #ff4d6d55;border-radius:8px;padding:16px 20px;margin-bottom:16px;font-size:13px;color:#c0a0a8;display:flex;gap:12px;align-items:flex-start;">
       <span style="font-size:20px;flex-shrink:0;">🚨</span>
-      <div><strong style="color:#ff4d6d;">Regime Filter Active:</strong> Sector data shown for reference only. No new long positions recommended today.</div>
+      <div><strong style="color:#ff4d6d;">Regime Filter Active:</strong> Sector data shown for reference only. No new long positions recommended today based on current market regime.</div>
     </div>
   
     <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:10px;font-size:11px;color:#4a6080;font-family:monospace;">
@@ -245,47 +252,31 @@
           <span class="ticker-tag">XLE</span>
         </td>
         <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
-          +6.77%
+          +7.13%
         </td>
         <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
-          +10.88%
+          +11.92%
         </td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#001a3d;color:#4da6ff;border:1px solid #4da6ff33;">POSITIVE</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">LIMITED</span></td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">75.49</td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">78.47</td>
       </tr>
       <tr>
         <td>
           <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Financials</div>
           <span class="ticker-tag">XLF</span>
         </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -0.73%
+        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">
+          +0.55%
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -4.99%
+          -6.48%
         </td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NEUTRAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">34.50</td>
-      </tr>
-      <tr>
-        <td>
-          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Utilities</div>
-          <span class="ticker-tag">XLU</span>
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -2.34%
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -4.79%
-        </td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">36.75</td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">40.50</td>
       </tr>
       <tr>
         <td>
@@ -293,47 +284,15 @@
           <span class="ticker-tag">XLB</span>
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -2.79%
+          -1.11%
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -8.69%
+          -7.30%
         </td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NEUTRAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">25.11</td>
-      </tr>
-      <tr>
-        <td>
-          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Technology</div>
-          <span class="ticker-tag">XLK</span>
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -3.05%
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -4.80%
-        </td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">40.16</td>
-      </tr>
-      <tr>
-        <td>
-          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Industrials</div>
-          <span class="ticker-tag">XLI</span>
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -3.24%
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -6.61%
-        </td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">31.92</td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">48.33</td>
       </tr>
       <tr>
         <td>
@@ -341,63 +300,31 @@
           <span class="ticker-tag">XLY</span>
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -3.91%
+          -2.37%
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -6.33%
+          -6.98%
         </td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">28.72</td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">41.66</td>
       </tr>
       <tr>
         <td>
-          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Consumer Staples</div>
-          <span class="ticker-tag">XLP</span>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Industrials</div>
+          <span class="ticker-tag">XLI</span>
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -4.11%
+          -2.38%
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -8.88%
+          -8.71%
         </td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">29.88</td>
-      </tr>
-      <tr>
-        <td>
-          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Real Estate</div>
-          <span class="ticker-tag">XLRE</span>
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -5.00%
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -7.25%
-        </td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">29.39</td>
-      </tr>
-      <tr>
-        <td>
-          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Communication Services</div>
-          <span class="ticker-tag">XLC</span>
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -5.02%
-        </td>
-        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -4.61%
-        </td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">31.34</td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">43.33</td>
       </tr>
       <tr>
         <td>
@@ -405,742 +332,480 @@
           <span class="ticker-tag">XLV</span>
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -5.27%
+          -2.74%
         </td>
         <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
-          -8.26%
+          -7.22%
         </td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
-        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">HIGH</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
         <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
-        <td style="color:#00d4a0;font-family:monospace;font-weight:600;">27.36</td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">34.20</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Utilities</div>
+          <span class="ticker-tag">XLU</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -2.80%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -4.20%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">46.04</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Consumer Staples</div>
+          <span class="ticker-tag">XLP</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -3.60%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -8.60%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">34.57</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Technology</div>
+          <span class="ticker-tag">XLK</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -3.62%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -5.79%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">44.87</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Real Estate</div>
+          <span class="ticker-tag">XLRE</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -4.51%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -7.77%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">30.97</td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size:14px;color:#e2eaf5;margin-bottom:2px;">Communication Services</div>
+          <span class="ticker-tag">XLC</span>
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -5.63%
+        </td>
+        <td style="color:#ff4d6d;font-family:monospace;font-weight:600;">
+          -6.80%
+        </td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;">NEGATIVE</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">NORMAL</span></td>
+        <td style="text-align:center;"><span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#070d1a;color:#4a6080;border:1px solid #1e3050;">MODERATE</span></td>
+        <td style="color:#e2eaf5;font-family:monospace;font-weight:600;">33.75</td>
       </tr></tbody>
   </table>
 </div>
 
-<!-- ══ SETUPS ══ -->
+<!-- ══ SETUPS + AVOID ══ -->
+<div style="display:grid;grid-template-columns:1.5fr 1fr;gap:32px;margin-bottom:40px;">
+  <div>
+    <div class="section-title">🎯 Top-Down Scan Environments</div>
+    
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ffd166;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;">🟢 50 MA Pullbacks <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#2d2000;color:#ffd166;border:1px solid #ffd16633;">CAUTION</span></div>
+                <div style="font-size:13px;color:#4a6080;">Utilities / Moderate Uptrend</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">-4.2%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;">Sector in a long-term uptrend but currently resting. Price testing the 50 SMA and RSI has cooled off.</div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">-4.2%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#ffd166;">46.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">+0.2%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#ffd166;">WARN</div></div>
+            </div>
+            <div style="background:#ffd1661a;padding:12px;border-radius:6px;font-size:13px;color:#ffd166;border:1px solid #ffd1664d;">
+              <strong style="color:#ffd166;margin-right:8px;">⚠️ REDUCED SIZE</strong>Scan for stocks testing their 50-day MA on low volume. Buy the bounce.
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #00d4a0;padding:20px;border-radius:8px;margin-bottom:12px;">
+          
+          <div style="">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:#e2eaf5;margin-bottom:4px;display:flex;align-items:center;gap:8px;"> <span style="padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;">ACTIVE</span></div>
+                <div style="font-size:13px;color:#4a6080;"> </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:monospace;font-size:18px;font-weight:700;color:#ff4d6d;">0.0%</div>
+                <div style="font-size:10px;color:#4a6080;text-transform:uppercase;letter-spacing:.05em;">20D Mom</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:#e2eaf5;line-height:1.5;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:24px;border-top:1px solid #1e3050;padding-top:12px;margin-bottom:16px;">
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Mom(20D)</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">RSI</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">0.0</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Dist 50MA</div><div style="font-family:monospace;font-size:14px;color:#ff4d6d;">0.0%</div></div>
+              <div><div style="font-size:10px;color:#4a6080;margin-bottom:4px;text-transform:uppercase;">Status</div><div style="font-family:monospace;font-size:14px;color:#00d4a0;">ACTIVE</div></div>
+            </div>
+            <div style="background:#00d4a01a;padding:12px;border-radius:6px;font-size:13px;color:#00d4a0;border:1px solid #00d4a04d;">
+              <strong style="color:#00d4a0;margin-right:8px;">🎯 FULL SIZE</strong>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div>
+    <div class="section-title">🔴 Sectors to Avoid</div>
+    
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Technology <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-3.6% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Health Care <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-2.7% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Financials <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">+0.6% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Consumer Discretionary <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-2.4% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Communication Services <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-5.6% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Industrials <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-2.4% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Consumer Staples <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-3.6% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ffd166;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ffd166;font-weight:bold;display:flex;align-items:center;gap:8px;">Energy <span style="background:#2d2000;color:#ffd166;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">OVERBOUGHT</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ffd166;">+7.1% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">RSI Overbought (78.5) — momentum exhaustion likely near term.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Real Estate <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-4.5% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+        <div style="border-left:4px solid #ff4d6d;background:#0d1626;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="color:#ff4d6d;font-weight:bold;display:flex;align-items:center;gap:8px;">Materials <span style="background:#2d0010;color:#ff4d6d;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;">DISTRIBUTION</span></div>
+            <div style="font-family:monospace;font-size:14px;font-weight:700;color:#ff4d6d;">-1.1% <span style="font-size:10px;opacity:.6;font-weight:400;color:#e2eaf5;">(10D)</span></div>
+          </div>
+          <div style="font-size:13px;color:#4a6080;">Structural breakdown — price below declining 50 SMA with EMA10 < EMA20.</div>
+        </div>
+  </div>
+</div>
+
+<!-- ══ SCREENER LINKS ══ -->
+
 <div class="section-wrap">
-  <div class="section-title">🎯 Sector Environments &amp; Trade Guidance</div>
+  <div class="section-title">🔗 Screener Links — Active Setups</div>
+  <div style="font-size:13px;color:#4a6080;margin-bottom:16px;">
+    Each URL opens Finviz with optimal fundamental and technical filters applied for the detected setup in that specific sector.
+  </div>
   
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #4da6ff;padding:16px;margin-bottom:12px;border-radius:8px;">
+      <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:12px;">Utilities</div>
       
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLK</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Technology</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
+        <div style="background:#070d1a;border:1px solid #1e3050;padding:12px;border-radius:6px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:11px;color:#4a6080;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">🟢 50 MA Pullbacks</div>
+            <div style="font-size:14px;font-weight:600;color:#e2eaf5;">Broader Sector</div>
           </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
+          <div style="display:flex;gap:8px;">
+            <a href="https://finviz.com/screener.ashx?v=111&f=sec_utilities,fa_pe_u30,fa_debteq_u1,fa_pb_u5,ta_sma50_pa" target="_blank" style="padding:6px 12px;background:#002e22;color:#00d4a0;border:1px solid #00d4a033;border-radius:4px;font-size:11px;font-weight:700;text-decoration:none;">Open ↗</a>
+            
+            <button data-url="https://finviz.com/screener.ashx?v=111&f=sec_utilities,fa_pe_u30,fa_debteq_u1,fa_pb_u5,ta_sma50_pa" onclick="navigator.clipboard.writeText(this.dataset.url);this.innerText='Copied!';setTimeout(()=>this.innerText='Copy URL',2000)" style="padding:6px 12px;background:#0d1626;color:#e2eaf5;border:1px solid #1e3050;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">Copy URL</button>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.03</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.048</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ffd166;">40.2</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.036</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
         </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLV</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Health Care</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.053</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.083</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">27.4</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">HIGH</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.065</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLF</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Financials</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.007</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.05</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ffd166;">34.5</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.052</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLY</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Consumer Discretionary</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.039</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.063</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">28.7</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.064</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLC</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Communication Services</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.05</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.046</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ffd166;">31.3</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.044</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLI</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Industrials</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.032</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.066</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ffd166;">31.9</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.032</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLP</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Consumer Staples</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.041</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.089</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">29.9</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.048</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                ⚠️ EXTENDED
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLE</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Energy</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            RSI 75 — momentum exhaustion zone. Sector has run hard (20D: +10.9%). Due for a cooling-off period.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">+6.8%</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">+10.9%</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">75.5</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">+13.2%</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">ALIGNED</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#ffd166;">TIGHTEN — if already in a trade, scale out partial at current levels. Lock in gains.</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#ffd166;">Trail aggressively — do not let a winner become a loser on a sector reversal.</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Wait for RSI to cool below 65 before new entries. Do not chase extended sectors.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Mean reversion snap. Sectors at RSI > 75 can drop 5–8% quickly on any negative catalyst.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLU</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Utilities</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Sustained negative momentum across both 10D and 20D timeframes. No technical reason to be long.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.023</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.048</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ffd166;">36.8</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">+0.0%</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ffd166;">MIXED</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLRE</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Real Estate</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.05</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.073</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">29.4</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.046</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
-        <div style="background:#0d1626;border:1px solid #1e3050;border-left:4px solid #ff4d6d;
-                    border-radius:8px;padding:18px 20px;margin-bottom:10px;opacity:0.65;">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:12px;">
-            <div>
-              <div style="font-size:15px;font-weight:700;color:#e2eaf5;margin-bottom:3px;">
-                🔴 AVOID
-                <span style="font-size:11px;font-weight:400;color:#4a6080;margin-left:8px;">XLB</span>
-              </div>
-              <div style="font-size:12px;color:#4a6080;">Materials</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-              <div style="display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
-                          background:#2d0010;color:#ff4d6d;border:1px solid #ff4d6d33;
-                          margin-bottom:4px;white-space:nowrap;">NO NEW ENTRIES</div>
-              <div style="font-size:10px;color:#ff4d6d;font-weight:600;margin-top:2px;">Regime fit: AVOID</div>
-            </div>
-          </div>
-          <div style="font-size:13px;color:#e2eaf5;line-height:1.55;margin-bottom:12px;
-                      padding:10px 12px;background:#070d1a;border-radius:6px;border-left:3px solid #ff4d6d;">
-            Structural breakdown — EMA10 < EMA20, price below 50SMA. Institutional selling dominant.
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;padding:10px 0;
-                      border-top:1px solid #1e3050;border-bottom:1px solid #1e3050;margin-bottom:12px;">
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">10D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.028</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">20D Mom</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.087</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">RSI</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#00d4a0;">25.1</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Volume</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#4a6080;">NORMAL</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Dist 50SMA</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">-0.043</div>
-         </div>
-            <div style="min-width:68px;">
-           <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">EMA Stack</div>
-           <div style="font-family:monospace;font-size:13px;font-weight:600;color:#ff4d6d;">BEARISH</div>
-         </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">TP Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-            <div style="background:#070d1a;padding:8px 10px;border-radius:6px;">
-              <div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;">SL Adjustment</div>
-              <div style="font-size:12px;color:#e2eaf5;">N/A</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:#e2eaf5;padding:8px 10px;border-radius:6px;
-                      background:#2d0010;border:1px solid #ff4d6d22;margin-bottom:8px;">
-            <span style="color:#ff4d6d;font-weight:600;margin-right:6px;">📐 Sizing:</span>Macro regime is SIDELINED/BEARISH — capital preservation mode. No new longs in any sector.
-          </div>
-          <div style="font-size:11px;color:#ff9f43;padding:6px 10px;border-radius:4px;
-                        background:#070d1a;border-left:3px solid #ff9f4355;">⚠ Catching a falling knife. Any bounce is likely a relief rally, not a new uptrend.</div>
-        </div>
+      
     </div>
-  
 </div>
 
 <!-- ══ FOOTER ══ -->
@@ -1155,86 +820,170 @@
 </div></body>
 
     <script>
+    // ── Treemap ───────────────────────────────────────────────────────────────
     am4core.ready(function() {
       am4core.useTheme(am4themes_animated);
       const chart = am4core.createFromConfig({
-        "type":"TreeMap","dataFields":{"value":"marketCap","name":"sector","color":"color"},
-        "zoomable":false,"maxLevels":1,"data":[{"sector":"Technology","ticker":"XLK","marketCap":29.8,"weight":"29.8","dayReturn":"-0.58","ytdReturn":"-5.65","color":"#475569"},{"sector":"Health Care","ticker":"XLV","marketCap":12.9,"weight":"12.9","dayReturn":"+0.01","ytdReturn":"-6.89","color":"#475569"},{"sector":"Financials","ticker":"XLF","marketCap":12.8,"weight":"12.8","dayReturn":"+0.02","ytdReturn":"-10.29","color":"#475569"},{"sector":"Consumer Discretionary","ticker":"XLY","marketCap":10.3,"weight":"10.3","dayReturn":"-0.40","ytdReturn":"-7.33","color":"#475569"},{"sector":"Communication Services","ticker":"XLC","marketCap":8.9,"weight":"8.9","dayReturn":"-1.40","ytdReturn":"-4.94","color":"#f87171"},{"sector":"Industrials","ticker":"XLI","marketCap":8.5,"weight":"8.5","dayReturn":"+0.58","ytdReturn":"+3.81","color":"#475569"},{"sector":"Consumer Staples","ticker":"XLP","marketCap":6.1,"weight":"6.1","dayReturn":"-0.09","ytdReturn":"+4.40","color":"#475569"},{"sector":"Energy","ticker":"XLE","marketCap":4.1,"weight":"4.1","dayReturn":"+2.03","ytdReturn":"+33.27","color":"#10b981"},{"sector":"Utilities","ticker":"XLU","marketCap":2.4,"weight":"2.4","dayReturn":"+0.69","ytdReturn":"+4.42","color":"#475569"},{"sector":"Real Estate","ticker":"XLRE","marketCap":2.3,"weight":"2.3","dayReturn":"-0.81","ytdReturn":"-0.22","color":"#475569"},{"sector":"Materials","ticker":"XLB","marketCap":2.2,"weight":"2.2","dayReturn":"+1.89","ytdReturn":"+5.05","color":"#34d399"}]
+        "type":        "TreeMap",
+        "dataFields":  { "value": "marketCap", "name": "sector", "color": "color" },
+        "zoomable":    false,
+        "maxLevels":   1,
+        "data":        [{"sector":"Technology","ticker":"XLK","marketCap":29.8,"weight":"29.8","dayReturn":"-2.86","ytdReturn":"-7.93","color":"#dc2626"},{"sector":"Health Care","ticker":"XLV","marketCap":12.9,"weight":"12.9","dayReturn":"-0.13","ytdReturn":"-6.08","color":"#475569"},{"sector":"Financials","ticker":"XLF","marketCap":12.8,"weight":"12.8","dayReturn":"-0.50","ytdReturn":"-10.61","color":"#475569"},{"sector":"Consumer Discretionary","ticker":"XLY","marketCap":10.3,"weight":"10.3","dayReturn":"-1.67","ytdReturn":"-8.00","color":"#f87171"},{"sector":"Communication Services","ticker":"XLC","marketCap":8.9,"weight":"8.9","dayReturn":"-2.39","ytdReturn":"-6.95","color":"#dc2626"},{"sector":"Industrials","ticker":"XLI","marketCap":8.5,"weight":"8.5","dayReturn":"-2.30","ytdReturn":"+2.11","color":"#dc2626"},{"sector":"Consumer Staples","ticker":"XLP","marketCap":6.1,"weight":"6.1","dayReturn":"-0.36","ytdReturn":"+4.54","color":"#475569"},{"sector":"Energy","ticker":"XLE","marketCap":4.1,"weight":"4.1","dayReturn":"+1.72","ytdReturn":"+34.96","color":"#34d399"},{"sector":"Utilities","ticker":"XLU","marketCap":2.4,"weight":"2.4","dayReturn":"-0.11","ytdReturn":"+4.68","color":"#475569"},{"sector":"Real Estate","ticker":"XLRE","marketCap":2.3,"weight":"2.3","dayReturn":"-0.07","ytdReturn":"-0.35","color":"#475569"},{"sector":"Materials","ticker":"XLB","marketCap":2.2,"weight":"2.2","dayReturn":"-0.57","ytdReturn":"+6.53","color":"#475569"}]
       }, "treemap-div", am4charts.TreeMap);
+
       const series = chart.seriesTemplates.create("0");
       const col    = series.columns.template;
-      col.fillOpacity=0.92; col.strokeOpacity=1; col.stroke=am4core.color("#070d1a"); col.strokeWidth=2;
-      col.column.cornerRadiusTopLeft=4; col.column.cornerRadiusTopRight=4;
-      col.column.cornerRadiusBottomLeft=4; col.column.cornerRadiusBottomRight=4;
-      col.tooltipText="[bold fontSize:'15px']{sector}[/]\nWeight: {weight}%\nDay: {dayReturn}%\nYTD: {ytdReturn}%";
-      const hover=col.states.create("hover"); hover.properties.fillOpacity=1;
-      const bullet=series.bullets.push(new am4charts.LabelBullet());
-      bullet.locationX=0.5; bullet.locationY=0.5;
-      bullet.label.text="[bold]{sector}[/]\n{dayReturn}%";
-      bullet.label.fill=am4core.color("#ffffff"); bullet.label.fontSize=13;
-      bullet.label.truncate=true; bullet.label.hideOversized=true;
-      bullet.label.textAlign="middle"; bullet.label.wrap=true; bullet.label.maxWidth=100;
-      chart.events.on("ready",function(){
-        if(col.tooltip){
-          col.tooltip.getFillFromObject=false;
-          col.tooltip.background.fill=am4core.color("#0d1626");
-          col.tooltip.background.stroke=am4core.color("#1e3050");
-          col.tooltip.background.strokeWidth=1;
-          col.tooltip.label.fill=am4core.color("#e2eaf5");
-          col.tooltip.animationDuration=100;
+      col.fillOpacity    = 0.92;
+      col.strokeOpacity  = 1;
+      col.stroke         = am4core.color("#070d1a");
+      col.strokeWidth    = 2;
+      col.column.cornerRadiusTopLeft     = 4;
+      col.column.cornerRadiusTopRight    = 4;
+      col.column.cornerRadiusBottomLeft  = 4;
+      col.column.cornerRadiusBottomRight = 4;
+      col.tooltipText = "[bold fontSize:'15px']{sector}[/]\nWeight: {weight}%\nDay: {dayReturn}%\nYTD: {ytdReturn}%";
+      const hover = col.states.create("hover");
+      hover.properties.fillOpacity = 1;
+
+      const bullet = series.bullets.push(new am4charts.LabelBullet());
+      bullet.locationX = 0.5; bullet.locationY = 0.5;
+      bullet.label.text = "[bold]{sector}[/]\n{dayReturn}%";
+      bullet.label.fill = am4core.color("#ffffff");
+      bullet.label.fontSize = 13;
+      bullet.label.truncate = true; bullet.label.hideOversized = true;
+      bullet.label.textAlign = "middle"; bullet.label.wrap = true;
+      bullet.label.maxWidth = 100;
+
+      chart.events.on("ready", function() {
+        if (col.tooltip) {
+          col.tooltip.getFillFromObject    = false;
+          col.tooltip.background.fill      = am4core.color("#0d1626");
+          col.tooltip.background.stroke    = am4core.color("#1e3050");
+          col.tooltip.background.strokeWidth = 1;
+          col.tooltip.label.fill           = am4core.color("#e2eaf5");
+          col.tooltip.animationDuration    = 100;
         }
       });
     });
-    (function(){
-      const dates=["2025-12-15","2025-12-16","2025-12-17","2025-12-18","2025-12-19","2025-12-22","2025-12-23","2025-12-24","2025-12-26","2025-12-29","2025-12-30","2025-12-31","2026-01-02","2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-20","2026-01-21","2026-01-22","2026-01-23","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-23","2026-03-24"];
-      const relPerf={"SPY":[0,-0.2732,-1.3706,-0.6258,-0.0206,0.6023,1.0621,1.4176,1.4073,1.0459,0.9225,0.1748,0.3584,1.0268,1.6277,1.3001,1.2898,1.9597,2.1198,1.9156,1.4147,1.6908,1.6056,-0.4627,0.686,1.2119,1.2487,1.7628,2.1683,2.158,1.9553,1.6512,2.1565,1.2927,0.8021,-0.4569,1.4529,1.942,1.6732,1.6497,0.0793,0.1498,0.3114,0.8168,0.5509,1.278,0.2439,0.9725,1.8245,1.2589,0.7727,0.83,-0.0588,0.6464,0.0852,-1.2266,-0.3614,-0.5215,-0.6464,-2.155,-2.7089,-1.7187,-1.4602,-2.8352,-3.0746,-4.7243,-3.7239,-4.0471],"XLK":[0,0.1827,-2.045,-0.5341,1.6163,2.0098,2.565,2.811,2.9726,2.5088,2.1855,1.1736,1.4055,1.6304,3.0569,2.9726,1.3633,2.7056,3.1553,2.9375,1.6866,2.2207,2.3331,-0.3233,1.0611,1.8131,1.9606,2.6564,4.0408,4.87,3.2115,1.1103,2.0801,-0.1546,-2.9375,-4.6873,-0.8222,0.7379,0.1757,0.4708,-2.1715,-1.9255,-1.9817,-0.9768,-1.4687,-0.9979,-2.6564,-1.3914,0.4989,-0.9065,-2.4877,-1.9396,-3.3732,-1.7287,-1.4898,-3.5207,-1.785,-1.785,-1.3141,-3.1342,-3.8651,-2.4736,-1.9396,-3.0499,-2.7196,-4.9262,-3.7597,-4.3219],"XLV":[0,-1.3004,-1.4798,-1.4029,-0.7431,-0.5125,-0.7111,-0.1922,-0.032,-0.1858,-0.2691,-0.8328,-0.378,-0.6791,1.2748,2.2806,1.294,0.7751,0.82,0.41,1.1275,0.5509,-0.2306,-0.4484,1.3837,1.4029,0.884,1.2812,-0.4164,-1.1467,-1.4606,-0.8712,-0.2627,-1.2812,-0.0448,-0.8072,1.0314,0.1409,-0.4933,0.0961,-0.0641,1.0058,0.8136,1.0058,0.7431,0.4612,1.5631,1.1339,1.1083,0.8456,2.6265,1.5567,0.41,0.6086,-1.4029,-2.1781,-1.1787,-1.8898,-2.082,-3.8053,-4.0423,-3.2607,-4.1384,-5.7399,-6.0794,-6.8994,-7.2582,-7.2454],"XLF":[0,-0.6365,-0.6547,-0.8183,-0.2728,0.6001,0.8001,1.3457,1.1457,0.6001,0.3455,-0.4001,-0.1091,2.0731,2.5641,1.1275,1.6548,1.3457,0.5456,-1.3821,-1.5276,-1.1275,-1.0002,-3.2551,-2.7823,-2.1458,-3.4915,-2.8732,-3.6188,-3.637,-2.6187,-2.8187,-1.7458,-2.655,-1.8731,-3.0915,-1.3275,-1.9094,-2.6187,-4.0917,-6.0011,-6.0738,-5.0736,-4.3644,-5.1646,-4.5463,-7.7469,-7.2922,-5.6738,-4.5281,-6.4739,-6.7103,-6.874,-6.3466,-6.8376,-8.0378,-8.4743,-8.9653,-9.729,-11.202,-11.0929,-10.3473,-9.8745,-10.9474,-10.9111,-10.7474,-10.4019,-10.3837],"XLY":[0,0.1643,-0.994,0.5011,0.0986,0.5011,0.3615,0.7065,0.2629,-0.7229,-1.1254,-1.9059,-2.7766,-1.1747,-0.5422,-0.6818,0.9776,2.2016,2.292,2.0373,0.4272,0.7968,0.4682,-2.1441,-0.2711,0.7311,1.1501,0.4847,0.7886,0.0329,-0.4436,-0.46,0.1972,-0.6079,-1.339,-3.4667,-3.0724,-3.4338,-2.7931,-3.2613,-4.6003,-4.5593,-4.6743,-3.8692,-4.51,-3.516,-5.5368,-4.0992,-3.8117,-3.8446,-4.0007,-5.1836,-6.0544,-4.3868,-4.2553,-5.9887,-5.8654,-5.9887,-6.2351,-8.3874,-8.9296,-7.8288,-7.0237,-9.1678,-9.8825,-11.4926,-9.5375,-9.899],"XLC":[0,0.0686,-0.652,-0.0858,-0.0429,0.0772,0.7034,1.3039,1.201,1.1324,1.4755,0.9865,0.2831,1.0123,0.652,0.4461,0.7806,1.1495,0.8407,0.2745,0.06,-0.3088,-1.201,-2.6593,-1.6642,-0.2745,0.3346,1.0294,0.2831,0.1544,2.7623,3.0111,2.6593,1.0037,0.1973,-0.3088,-0.6949,0.2659,0.8664,0.1458,-1.6557,-1.7071,-1.8615,-1.6986,-1.2267,0.1973,-1.038,-0.3517,-0.06,0.1287,1.2696,1.1152,1.1924,1.9044,1.6042,0.7635,0.8493,0.6949,0.3689,-1.1152,-1.8186,-1.0637,-1.0294,-2.4964,-2.9424,-3.7231,-3.3113,-4.6667],"XLI":[0,-0.5924,-2.204,-1.567,-0.7198,0.0382,0,0.3249,0.1401,-0.0764,-0.3631,-1.1912,0.6306,1.8218,3.204,1.2612,2.0256,3.1467,3.9366,4.4716,4.6372,5.5991,6.3125,4.1659,5.9685,5.4207,4.6054,4.7073,5.1405,4.5544,5.65,5.3825,6.7138,7.6119,7.8986,7.2489,10.3128,10.644,10.7778,11.3702,10.0389,10.9434,11.523,11.4975,12.3256,12.8925,11.3638,12.7333,11.8543,12.5549,12.8352,13.9563,11.7523,12.0899,9.5993,8.2489,8.8859,8.2999,7.9623,5.2551,4.8793,5.7774,6.0577,5.2169,4.5035,2.9811,3.8601,4.4653],"XLP":[0,-0.452,0.0126,-0.565,-1.0799,-2.2099,-2.6745,-1.9086,-1.7705,-1.7077,-1.8709,-2.4611,-2.4485,-2.8754,-2.7248,-3.7921,-1.5068,-0.4897,0.6781,1.8458,3.2521,3.4279,3.1015,3.4154,3.5158,3.3024,4.106,3.9427,4.4199,3.3651,3.1266,4.8594,6.1025,7.8227,9.229,9.1411,10.4219,9.7815,9.4299,10.9995,12.0166,12.3933,10.7484,10.5475,10.0829,10.3591,11.7152,12.6821,11.7654,11.5771,13.0211,11.3887,10.1708,9.4425,7.2451,7.7097,7.9483,7.6344,6.2155,5.7885,6.4038,6.7052,6.3536,3.767,2.9257,2.0718,1.9337,1.8458],"XLE":[0,-3.0538,-0.9073,-2.3457,-2.3457,-2.1686,-1.5269,-1.8146,-2.1908,-1.2613,-0.509,-1.0622,1.0179,3.7619,0.9958,-0.1328,3.0095,3.2751,2.5448,4.0053,6.351,5.3552,5.5322,5.333,7.8778,8.2319,8.8515,8.9179,9.9137,10.7546,11.7725,12.9675,10.7546,14.3395,16.9064,15.5344,17.8358,18.6988,18.5661,21.6641,19.4512,20.27,18.9422,21.2215,22.1067,21.4428,22.0403,21.9296,21.4207,21.819,23.7442,26.2226,25.0719,24.3417,24.9834,25.1826,24.6293,23.0361,26.0898,27.2627,27.6831,28.1257,29.4755,29.2985,31.3565,31.2459,31.954,34.6316],"XLU":[0,-0.4165,-1.0643,-0.0925,-1.3651,-1.7353,-1.3882,-0.9486,-1.018,-0.8329,-0.6016,-1.2263,-0.0925,-1.2031,-0.7173,-3.1236,-2.8459,-1.6428,-1.4808,-0.8561,-0.1157,0.9024,0.3933,-0.6016,-0.4627,-1.18,-1.5271,-0.8098,0.4859,0.2545,0.2545,0.0694,-1.3882,0.0463,-0.3239,-0.2776,0.3008,0.6016,2.2675,3.1698,4.6969,7.5891,7.3114,5.5298,6.6867,7.1957,8.0056,9.2087,9.5789,9.1624,10.435,9.602,8.9079,9.3707,8.5146,8.1444,8.3989,7.7279,6.8255,7.5891,8.6534,9.3475,9.0467,8.1212,7.6816,3.3087,3.6094,4.3267],"XLRE":[0,-0.88,-0.44,-1.0511,-1.4177,-1.76,-1.7844,-1.1489,-0.9533,-0.6844,-0.4644,-1.3689,-1.2955,-1.1733,-0.5133,-1.8822,-1.1489,-1.0022,-0.7089,0.0489,1.1733,1.9311,3.1777,1.1978,1.5644,0.5622,0.8311,0.7578,0.8311,-0.1467,1.1244,1.2711,0.1222,-0.2444,1.3444,0.7822,2.6399,3.2755,4.7177,4.6199,4.791,6.331,7.4065,5.9643,5.5977,6.4776,6.5999,6.8932,6.1843,6.6487,7.1621,7.3576,6.8198,6.9665,5.9399,4.8399,5.0599,4.9132,3.6666,3.0066,3.2755,4.0821,4.4243,2.7133,2.4688,-0.7822,-0.7089,-1.5155],"XLB":[0,-0.266,0.1551,0.1108,0.5541,1.219,1.3963,1.5957,2.1941,1.3741,1.352,0.5098,2.2163,3.2358,5.2748,3.4574,5.2748,6.9592,7.5355,8.0009,8.0452,8.5106,7.8901,6.8041,9.1312,9.7518,10.7491,10.8821,10.7713,10.7048,10.8156,9.1977,10.0399,12.367,15.0044,11.9238,14.1622,15.6472,17.2651,18.8387,17.0878,18.1516,16.7996,17.5089,17.0878,17.3759,17.3759,18.2624,17.5975,17.4645,18.3732,18.0186,15.1152,15.0709,12.6551,10.5053,10.7934,10.5496,10.461,10.1064,9.0204,9.4858,9.7518,7.4468,5.8067,4.1223,5.3856,7.3803]};
-      if(!dates.length) return;
-      const COLORS={"SPY":"#ffd166","XLK":"#a78bfa","XLV":"#fb923c","XLF":"#ef4444","XLY":"#e879f9","XLC":"#4da6ff","XLI":"#f43f5e","XLP":"#86efac","XLE":"#00d4a0","XLU":"#38bdf8","XLRE":"#fb923c","XLB":"#94a3b8"};
-      const ORDER=['SPY','XLK','XLV','XLF','XLY','XLC','XLI','XLP','XLE','XLU','XLRE','XLB'];
-      const tickers=ORDER.filter(t=>relPerf[t]);
-      const traces=tickers.map(ticker=>({
-        x:dates,y:relPerf[ticker],type:'scatter',mode:'lines',name:ticker,
-        line:{color:COLORS[ticker]||'#4a6080',width:ticker==='SPY'?3:1.5},
-        opacity:ticker==='SPY'?1:0.75,hoverinfo:'none'
+
+    // ── Plotly SPY vs Sectors — solid lines, custom sorted tooltip ───────────
+    (function() {
+      const dates   = ["2025-12-16","2025-12-17","2025-12-18","2025-12-19","2025-12-22","2025-12-23","2025-12-24","2025-12-26","2025-12-29","2025-12-30","2025-12-31","2026-01-02","2026-01-05","2026-01-06","2026-01-07","2026-01-08","2026-01-09","2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16","2026-01-20","2026-01-21","2026-01-22","2026-01-23","2026-01-26","2026-01-27","2026-01-28","2026-01-29","2026-01-30","2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-23","2026-03-24","2026-03-25"];
+      const relPerf = {"SPY":[0,-1.1004,-0.3535,0.2534,0.8779,1.339,1.6955,1.6852,1.3228,1.1991,0.4493,0.6334,1.3036,1.9061,1.5776,1.5673,2.239,2.3996,2.1948,1.6925,1.9694,1.884,-0.19,0.9619,1.4892,1.5261,2.0416,2.4482,2.4379,2.2346,1.9297,2.4364,1.5703,1.0783,-0.1841,1.7308,2.2213,1.9518,1.9282,0.3535,0.4242,0.5863,1.093,0.8264,1.5555,0.5185,1.2491,2.1035,1.5364,1.0488,1.1063,0.2151,0.9221,0.3594,-0.956,-0.0884,-0.2489,-0.3742,-1.887,-2.4423,-1.4495,-1.1902,-2.569,-2.8091,-4.4633,-3.4602,-3.7842,-3.248],"XLK":[0,-2.2236,-0.7155,1.431,1.8238,2.3779,2.6235,2.7848,2.3218,1.9992,0.9891,1.2205,1.445,2.869,2.7848,1.1785,2.5182,2.9672,2.7497,1.5011,2.0342,2.1465,-0.5051,0.8768,1.6274,1.7747,2.4691,3.851,4.6787,3.0233,0.9259,1.8939,-0.3367,-3.1145,-4.8611,-1.0031,0.5542,-0.007,0.2876,-2.3499,-2.1044,-2.1605,-1.1574,-1.6484,-1.1785,-2.8339,-1.5713,0.3157,-1.0873,-2.6655,-2.1184,-3.5494,-1.908,-1.6695,-3.6967,-1.9641,-1.9641,-1.4941,-3.3109,-4.0404,-2.6515,-2.1184,-3.2267,-2.897,-5.0996,-3.9352,-4.4964,-4.0685],"XLV":[0,-0.1817,-0.1038,0.5647,0.7983,0.5971,1.1229,1.2851,1.1294,1.045,0.4738,0.9346,0.6296,2.6092,3.6282,2.6287,2.1029,2.1484,1.733,2.4599,1.8758,1.0839,0.8632,2.7195,2.739,2.2133,2.6157,0.8957,0.1558,-0.1623,0.4349,1.0515,0.0195,1.2721,0.4998,2.3626,1.4604,0.8178,1.4149,1.2527,2.3366,2.1419,2.3366,2.0705,1.7849,2.9013,2.4664,2.4404,2.1743,3.9787,2.8948,1.733,1.9342,-0.1038,-0.8892,0.1233,-0.5971,-0.7918,-2.5378,-2.778,-1.9861,-2.8753,-4.498,-4.842,-5.6727,-6.0362,-6.0232,-5.0821],"XLF":[0,-0.0183,-0.183,0.366,1.2445,1.4458,1.9949,1.7936,1.2445,0.9883,0.2379,0.5307,2.7269,3.2211,1.7753,2.306,1.9949,1.1896,-0.7504,-0.8968,-0.4941,-0.366,-2.6354,-2.1596,-1.519,-2.8734,-2.2511,-3.0015,-3.0198,-1.9949,-2.1962,-1.1164,-2.0315,-1.2445,-2.4707,-0.6955,-1.2811,-1.9949,-3.4773,-5.399,-5.4722,-4.4656,-3.7518,-4.5571,-3.9348,-7.1559,-6.6984,-5.0695,-3.9165,-5.8748,-6.1127,-6.2775,-5.7467,-6.2408,-7.4488,-7.888,-8.3821,-9.1508,-10.6332,-10.5234,-9.7731,-9.2972,-10.377,-10.3404,-10.1757,-9.828,-9.8097,-9.6999],"XLY":[0,-1.1564,0.3363,-0.0656,0.3363,0.1968,0.5413,0.0984,-0.8858,-1.2876,-2.0668,-2.9361,-1.3368,-0.7053,-0.8447,0.8119,2.034,2.1242,1.8699,0.2624,0.6315,0.3035,-2.3046,-0.4347,0.5659,0.9842,0.3199,0.6233,-0.1312,-0.6069,-0.6233,0.0328,-0.7709,-1.5009,-3.625,-3.2314,-3.5922,-2.9525,-3.42,-4.7568,-4.7158,-4.8306,-4.0269,-4.6666,-3.6742,-5.6918,-4.2565,-3.9695,-4.0023,-4.1581,-5.3391,-6.2085,-4.5436,-4.4124,-6.1429,-6.0198,-6.1429,-6.3889,-8.5377,-9.079,-7.98,-7.1762,-9.3168,-10.0303,-11.6378,-9.6859,-10.0467,-9.1856],"XLC":[0,-0.7201,-0.1543,-0.1114,0.0086,0.6344,1.2345,1.1316,1.063,1.4059,0.9173,0.2143,0.943,0.5829,0.3772,0.7115,1.0802,0.7715,0.2057,-0.0086,-0.3772,-1.2688,-2.7261,-1.7317,-0.3429,0.2658,0.9601,0.2143,0.0857,2.6918,2.9404,2.5889,0.9344,0.1286,-0.3772,-0.763,0.1972,0.7973,0.0772,-1.7231,-1.7745,-1.9288,-1.766,-1.2945,0.1286,-1.1059,-0.4201,-0.1286,0.06,1.2002,1.0459,1.123,1.8345,1.5345,0.6944,0.7801,0.6258,0.3,-1.183,-1.886,-1.1316,-1.0973,-2.5632,-3.009,-3.7891,-3.3776,-4.7321,-4.4664],"XLI":[0,-1.6212,-0.9804,-0.1282,0.6344,0.5959,0.9227,0.7369,0.519,0.2307,-0.6023,1.2303,2.4286,3.819,1.8647,2.6336,3.7614,4.5559,5.0942,5.2608,6.2284,6.946,4.7866,6.6,6.049,5.2288,5.3313,5.767,5.1775,6.2796,6.0105,7.3497,8.2532,8.5416,7.888,10.9701,11.3033,11.4379,12.0338,10.6946,11.6045,12.1876,12.162,12.995,13.5653,12.0274,13.4051,12.5208,13.2257,13.5076,14.6354,12.4183,12.7579,10.2525,8.894,9.5348,8.9453,8.6057,5.8824,5.5043,6.4078,6.6897,5.8439,5.1262,3.5948,4.479,5.0878,5.7926],"XLP":[0,0.4667,-0.1135,-0.6307,-1.7659,-2.2326,-1.4632,-1.3244,-1.2614,-1.4253,-2.0182,-2.0055,-2.4344,-2.283,-3.3552,-1.0595,-0.0378,1.1352,2.3083,3.721,3.8976,3.5696,3.885,3.9859,3.7714,4.5787,4.4147,4.894,3.8345,3.5949,5.3355,6.5843,8.3123,9.725,9.6367,10.9233,10.28,9.9268,11.5035,12.5252,12.9036,11.2513,11.0494,10.5827,10.8602,12.2225,13.1937,12.273,12.0838,13.5343,11.8946,10.671,9.9395,7.7321,8.1988,8.4384,8.1231,6.6978,6.2689,6.887,7.1897,6.8365,4.2381,3.393,2.5353,2.3966,2.3083,2.8128],"XLE":[0,2.2141,0.7304,0.7304,0.913,1.575,1.2782,0.8902,1.8489,2.625,2.0543,4.2,7.0304,4.1771,3.013,6.2543,6.5282,5.7749,7.2814,9.701,8.6738,8.8564,8.651,11.276,11.6412,12.2803,12.3488,13.3759,14.2433,15.2933,16.5259,14.2433,17.9411,20.5889,19.1737,21.5476,22.4378,22.3008,25.4965,23.2139,24.0584,22.6889,25.0399,25.953,25.2682,25.8845,25.7704,25.2454,25.6562,27.6421,30.1986,29.0116,28.2584,28.9203,29.1258,28.5551,26.9117,30.0616,31.2714,31.7051,32.1616,33.554,33.3714,35.4942,35.3801,36.1105,38.8724,38.2561],"XLU":[0,-0.6506,0.3253,-0.9526,-1.3243,-0.9758,-0.5344,-0.6041,-0.4182,-0.1859,-0.8132,0.3253,-0.79,-0.302,-2.7184,-2.4396,-1.2314,-1.0688,-0.4414,0.302,1.3243,0.8132,-0.1859,-0.0465,-0.7667,-1.1152,-0.395,0.9061,0.6738,0.6738,0.4879,-0.9758,0.4647,0.0929,0.1394,0.7203,1.0223,2.6952,3.6013,5.1348,8.039,7.7602,5.9712,7.1329,7.6441,8.4572,9.6654,10.0372,9.619,10.8968,10.0604,9.3634,9.8281,8.9684,8.5967,8.8522,8.1784,7.2723,8.039,9.1078,9.8048,9.5028,8.5734,8.132,3.7407,4.0428,4.763,5.1348],"XLRE":[0,0.4439,-0.1726,-0.5425,-0.8878,-0.9125,-0.2713,-0.074,0.1973,0.4192,-0.4932,-0.4192,-0.2959,0.3699,-1.0111,-0.2713,-0.1233,0.1726,0.9371,2.0715,2.836,4.0937,2.0962,2.4661,1.455,1.7263,1.6523,1.7263,0.7398,2.0222,2.1702,1.0111,0.6412,2.2441,1.6769,3.5512,4.1924,5.6473,5.5487,5.7213,7.275,8.36,6.9051,6.5351,7.4229,7.5462,7.8422,7.127,7.5956,8.1134,8.3107,7.7682,7.9162,6.8804,5.7707,5.9926,5.8446,4.5869,3.9211,4.1924,5.0062,5.3514,3.6252,3.3785,0.0986,0.1726,-0.6412,-0.6905],"XLB":[0,0.4222,0.3778,0.8222,1.4889,1.6667,1.8667,2.4667,1.6444,1.6222,0.7778,2.4889,3.5111,5.5556,3.7333,5.5556,7.2444,7.8222,8.2889,8.3333,8.8,8.1778,7.0889,9.4222,10.0444,11.0444,11.1778,11.0667,11,11.1111,9.4889,10.3333,12.6667,15.3111,12.2222,14.4667,15.9556,17.5778,19.1556,17.4,18.4667,17.1111,17.8222,17.4,17.6889,17.6889,18.5778,17.9111,17.7778,18.6889,18.3333,15.4222,15.3778,12.9556,10.8,11.0889,10.8444,10.7556,10.4,9.3111,9.7778,10.0444,7.7333,6.0889,4.4,5.6667,7.6667,9.8]};
+      if (!dates.length) return;
+
+      const COLORS = {"SPY":"#ffd166","XLK":"#a78bfa","XLV":"#fb923c","XLF":"#ef4444","XLY":"#e879f9","XLC":"#4da6ff","XLI":"#f43f5e","XLP":"#86efac","XLE":"#00d4a0","XLU":"#38bdf8","XLRE":"#fb923c","XLB":"#94a3b8"};
+      const ORDER  = ['SPY','XLK','XLV','XLF','XLY','XLC','XLI','XLP','XLE','XLU','XLRE','XLB'];
+      const tickers = ORDER.filter(t => relPerf[t]);
+
+      // Traces in fixed order — tooltip sorting is handled by the hover event below
+      const traces = tickers.map(ticker => ({
+        x:         dates,
+        y:         relPerf[ticker],
+        type:      'scatter',
+        mode:      'lines',
+        name:      ticker,
+        line:      { color: COLORS[ticker] || '#4a6080', width: ticker === 'SPY' ? 3 : 1.5 },
+        opacity:   ticker === 'SPY' ? 1 : 0.75,
+        hoverinfo: 'none'   // suppress Plotly's native tooltip entirely — we draw our own
       }));
-      traces.push({x:[dates[0],dates[dates.length-1]],y:[0,0],mode:'lines',
-        line:{color:'#1e3050',width:1},showlegend:false,hoverinfo:'skip'});
-      const layout={
-        paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'#0d1626',
-        font:{color:'#e2eaf5',family:'JetBrains Mono, monospace',size:11},
-        margin:{l:50,r:20,t:16,b:50},height:380,hovermode:'x',
-        legend:{orientation:'h',y:-0.18,font:{size:11,color:'#4a6080'},bgcolor:'rgba(0,0,0,0)'},
-        xaxis:{gridcolor:'#1e3050',zeroline:false,tickfont:{color:'#4a6080',size:10},type:'date',tickformat:'%d %b'},
-        yaxis:{gridcolor:'#1e3050',zerolinecolor:'#1e3050',zerolinewidth:1,
-          tickfont:{color:'#4a6080',size:10},ticksuffix:'%',
-          title:{text:'Relative Return vs Day 1',font:{color:'#4a6080',size:10}}}
-      };
-      const chartDiv=document.getElementById('relPerfChart');
-      Plotly.newPlot(chartDiv,traces,layout,{displayModeBar:false,responsive:true});
-      const tip=document.createElement('div');
-      tip.style.cssText=['position:absolute','top:16px','pointer-events:none','z-index:99',
-        'background:#111f35','border:1px solid #1e3050','border-radius:6px',
-        'padding:10px 14px','min-width:160px','font-family:JetBrains Mono,monospace',
-        'font-size:11px','color:#e2eaf5','display:none','line-height:1.9'].join(';');
-      chartDiv.style.position='relative'; chartDiv.appendChild(tip);
-      chartDiv.on('plotly_hover',function(evt){
-        const pts=evt.points.filter(p=>p.data.hoverinfo!=='skip');
-        if(!pts.length) return;
-        const idx=pts[0].pointIndex;
-        const dateLabel=dates[idx]?new Date(dates[idx]).toLocaleDateString('en-GB',{day:'2-digit',month:'short'}):'';
-        const entries=tickers.map(ticker=>({ticker,color:COLORS[ticker]||'#4a6080',
-          val:(relPerf[ticker]&&relPerf[ticker][idx]!=null)?relPerf[ticker][idx]:null}))
-          .filter(e=>e.val!==null).sort((a,b)=>b.val-a.val);
-        tip.innerHTML='<div style="font-weight:700;color:#4a6080;margin-bottom:6px;font-size:10px;letter-spacing:.06em;">'+dateLabel+'</div>'+
-          entries.map(e=>'<div style="display:flex;justify-content:space-between;gap:16px;">'+
-            '<span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+e.color+';margin-right:5px;vertical-align:middle;"></span><b>'+e.ticker+'</b></span>'+
-            '<span style="color:'+(e.val>=0?'#00d4a0':'#ff4d6d')+';font-weight:600;">'+(e.val>=0?'+':'')+e.val.toFixed(2)+'%</span></div>').join('');
-        const xFrac=(evt.event.offsetX||0)/chartDiv.offsetWidth;
-        tip.style.display='block';
-        if(xFrac>0.6){tip.style.right=(chartDiv.offsetWidth-(evt.event.offsetX||0)+12)+'px';tip.style.left='auto';}
-        else{tip.style.left=((evt.event.offsetX||0)+16)+'px';tip.style.right='auto';}
+
+      // Zero reference — solid, no hover
+      traces.push({
+        x: [dates[0], dates[dates.length - 1]], y: [0, 0],
+        mode: 'lines', line: { color: '#1e3050', width: 1 },
+        showlegend: false, hoverinfo: 'skip'
       });
-      chartDiv.on('plotly_unhover',function(){tip.style.display='none';});
+
+      const layout = {
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor:  '#0d1626',
+        font:    { color: '#e2eaf5', family: 'JetBrains Mono, monospace', size: 11 },
+        margin:  { l: 50, r: 20, t: 16, b: 50 },
+        height:  380,
+        hovermode: 'x',   // x-crosshair so we know the hovered date index
+        legend: {
+          orientation: 'h', y: -0.18,
+          font: { size: 11, color: '#4a6080' },
+          bgcolor: 'rgba(0,0,0,0)'
+        },
+        xaxis: {
+          gridcolor: '#1e3050', zeroline: false,
+          tickfont:  { color: '#4a6080', size: 10 },
+          type: 'date', tickformat: '%d %b'
+        },
+        yaxis: {
+          gridcolor:     '#1e3050',
+          zerolinecolor: '#1e3050', zerolinewidth: 1,
+          tickfont:      { color: '#4a6080', size: 10 },
+          ticksuffix:    '%',
+          title: { text: 'Relative Return vs Day 1', font: { color: '#4a6080', size: 10 } }
+        }
+      };
+
+      const chartDiv = document.getElementById('relPerfChart');
+      Plotly.newPlot(chartDiv, traces, layout, { displayModeBar: false, responsive: true });
+
+      // Custom tooltip div — positioned absolutely inside chart container
+      const tip = document.createElement('div');
+      tip.style.cssText = [
+        'position:absolute', 'top:16px', 'pointer-events:none', 'z-index:99',
+        'background:#111f35', 'border:1px solid #1e3050',
+        'border-radius:6px', 'padding:10px 14px', 'min-width:160px',
+        'font-family:JetBrains Mono,monospace', 'font-size:11px',
+        'color:#e2eaf5', 'display:none', 'line-height:1.9'
+      ].join(';');
+      chartDiv.style.position = 'relative';
+      chartDiv.appendChild(tip);
+
+      // On hover: collect y values for that date index, sort desc, render
+      chartDiv.on('plotly_hover', function(evt) {
+        const pts = evt.points.filter(p => p.data.hoverinfo !== 'skip');
+        if (!pts.length) return;
+
+        // pts[0].pointIndex is the date index — get y from every ticker at that index
+        const idx = pts[0].pointIndex;
+        const dateLabel = dates[idx]
+          ? new Date(dates[idx]).toLocaleDateString('en-GB', { day:'2-digit', month:'short' })
+          : '';
+
+        // Build sorted list: value at hovered index for each ticker
+        const entries = tickers.map(ticker => ({
+          ticker,
+          color: COLORS[ticker] || '#4a6080',
+          val:   (relPerf[ticker] && relPerf[ticker][idx] != null) ? relPerf[ticker][idx] : null
+        }))
+        .filter(e => e.val !== null)
+        .sort((a, b) => b.val - a.val);  // highest on top — matches chart visual
+
+        tip.innerHTML =
+          '<div style="font-weight:700;color:#4a6080;margin-bottom:6px;font-size:10px;letter-spacing:.06em;">' + dateLabel + '</div>' +
+          entries.map(e =>
+            '<div style="display:flex;justify-content:space-between;gap:16px;">' +
+              '<span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + e.color + ';margin-right:5px;vertical-align:middle;"></span>' +
+              '<b>' + e.ticker + '</b></span>' +
+              '<span style="color:' + (e.val >= 0 ? '#00d4a0' : '#ff4d6d') + ';font-weight:600;">' +
+                (e.val >= 0 ? '+' : '') + e.val.toFixed(2) + '%' +
+              '</span>' +
+            '</div>'
+          ).join('');
+
+        // Position: right-align when cursor is past 60% of chart width
+        const gd    = chartDiv;
+        const xFrac = (evt.event.offsetX || 0) / gd.offsetWidth;
+        tip.style.display = 'block';
+        if (xFrac > 0.6) {
+          tip.style.right = (gd.offsetWidth - (evt.event.offsetX || 0) + 12) + 'px';
+          tip.style.left  = 'auto';
+        } else {
+          tip.style.left  = ((evt.event.offsetX || 0) + 16) + 'px';
+          tip.style.right = 'auto';
+        }
+      });
+
+      chartDiv.on('plotly_unhover', function() {
+        tip.style.display = 'none';
+      });
     })();
     </script>
 </html>
